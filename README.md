@@ -7,20 +7,20 @@ steps:
 1. zip a working express app
 2. deploy the function (there are scripts for deploy update and invoke)
 
-- make function-deploy
-
-```Makefile
-function-deploy:
-	./scripts/function/function-deploy.sh $(function)
+```sh
+make function-deploy function=function
 ```
 
 3. get all functions
 
-- make function-get-all
+```sh
+make function-get-all
+```
 
-```Makefile
-function-get-all:
-	./scripts/function/function-get-all.sh
+4. invoke the function
+
+```sh
+make function-invoke function=function
 ```
 
 - The main goal is to deploy ssr apps like remix, vite, vike, next, etc
