@@ -4,16 +4,24 @@
 
 steps:
 
-1. make executable
-2. aws_sso_login
-3. dev
-4. test
-5. install
-6. aws_function_list
-7. delete all...
-8. deploy
-9. invoke
-10. set up triggers...
+1. zip a working express app
+2. deploy the function (there are scripts for deploy update and invoke)
+
+- make function-deploy
+
+```Makefile
+function-deploy:
+	./scripts/function/function-deploy.sh $(function)
+```
+
+3. get all functions
+
+- make function-get-all
+
+```Makefile
+function-get-all:
+	./scripts/function/function-get-all.sh
+```
 
 - The main goal is to deploy ssr apps like remix, vite, vike, next, etc
 - The orientation of the goal is from aws cli and work our way toward the cdk and then finally integrate into winglang
