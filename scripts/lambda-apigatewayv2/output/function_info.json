@@ -1,0 +1,38 @@
+{
+    "FunctionName": "function",
+    "FunctionArn": "arn:aws:lambda:us-east-1:851725517932:function:function",
+    "Runtime": "nodejs20.x",
+    "Role": "arn:aws:iam::851725517932:role/lambda-full-access",
+    "Handler": "index.handler",
+    "CodeSize": 3327808,
+    "Description": "",
+    "Timeout": 3,
+    "MemorySize": 128,
+    "LastModified": "2024-06-07T21:25:10.177+0000",
+    "CodeSha256": "tulU60LvHUsDyid6TjB1Q8rg9lR+b9YMVgMgllCv7EI=",
+    "Version": "$LATEST",
+    "TracingConfig": {
+        "Mode": "PassThrough"
+    },
+    "RevisionId": "d6d1b642-faf0-4472-882b-2a59d30519e5",
+    "State": "Active",
+    "LastUpdateStatus": "Successful",
+    "PackageType": "Zip",
+    "Architectures": [
+        "x86_64"
+    ],
+    "EphemeralStorage": {
+        "Size": 512
+    },
+    "SnapStart": {
+        "ApplyOn": "None",
+        "OptimizationStatus": "Off"
+    },
+    "RuntimeVersionConfig": {
+        "RuntimeVersionArn": "arn:aws:lambda:us-east-1::runtime:92c5bcb1529200756eb64a0d90d4ab606fdaf21421321da6c202187b88833f52"
+    },
+    "LoggingConfig": {
+        "LogFormat": "Text",
+        "LogGroup": "/aws/lambda/function"
+    }
+}

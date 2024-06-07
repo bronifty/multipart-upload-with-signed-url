@@ -1,0 +1,1 @@
+sudo DEBIAN_FRONTEND=noninteractive auto-cpufreq --stats

@@ -1,0 +1,1 @@
+aws apigatewayv2 create-deployment --api-id API_ID --stage-name dev

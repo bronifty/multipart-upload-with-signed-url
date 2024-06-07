@@ -1,0 +1,12 @@
+{
+  "name": "aws-serverless-toolbelt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "engine-install": "pnpm --prefix ./engine install"
+  },
+  "keywords": [],
+  "author": "bronifty",
+  "license": "ISC"
+}
