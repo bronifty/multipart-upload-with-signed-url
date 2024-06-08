@@ -35,7 +35,28 @@ make api-add-one api=api function=function
 make api-get-all
 ```
 
-7. create api integration
+7. make lambda function trigger out of api gateway
+
+```sh
+
+
+API Gateway: api
+arn:aws:execute-api:us-east-1:851725517932:dkbu6cger5/*/*/function
+API endpoint: https://dkbu6cger5.execute-api.us-east-1.amazonaws.com/function
+Details
+API type: HTTP
+Authorization: NONE
+CORS: No
+Detailed metrics enabled: No
+isComplexStatement: No
+Method: ANY
+Resource path: /function
+Service principal: apigateway.amazonaws.com
+Stage: $default
+Statement ID: lambda-287ae595-528f-4b11-8280-3466de0c6a5b
+```
+
+8. create api integration
 
 ```sh
 make api-create-integration api=api function=function

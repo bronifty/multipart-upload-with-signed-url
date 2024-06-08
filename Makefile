@@ -51,7 +51,7 @@ function-delete-one:
 	./scripts/function/function-delete-one.sh $(function)
 
 function-delete-all:
-	./scripts/function/function-delete-function.sh
+	./scripts/function/function-delete-all.sh
 
 # apis 
 # call with api=<api-name> function=<function-name>
