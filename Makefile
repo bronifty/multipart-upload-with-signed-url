@@ -74,8 +74,14 @@ api-delete-all:
 api-create-integration:
 	./scripts/api/2-api-create-integration.sh $(api) $(function)
 
-api-get-integrations:
-	./scripts/api/api-get-integrations.sh $(api)
+api-get-all-integrations:
+	./scripts/api/api-get-all-integrations.sh $(api)
+
+api-cleanup:
+	./scripts/api/3-api-cleanup.sh
+
+
+
 
 # engine
 engine-install:
@@ -91,7 +97,9 @@ engine-clean:
 	pnpm --prefix ./engine clean
 
 
-
+# extras
+api-create-default-route:
+	./scripts/api/3-api-create-default-route.sh $(api) $(integration)
 
 
 .PHONY: all engine-start engine-dev engine-install api-get-all api-get-one api-add-one api-delete-one api-delete-all function-get-all function-get-one function-deploy function-update function-invoke function-delete-one function-delete-all clean check-variables cdk-bootstrap

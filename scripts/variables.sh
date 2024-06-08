@@ -7,6 +7,7 @@
 # export ARCH="$(uname -m)"
 export DEFAULT_FUNCTION_NAME="function"
 export DEFAULT_API_NAME="api"
+export DEFAULT_INTEGRATION_ID="4x8z9k9"
 export DEFAULT_FUNCTION_HANDLER="index.handler"
 export DEFAULT_FUNCTION_ROLE="arn:aws:iam::851725517932:role/lambda-full-access"
 export DEFAULT_FUNCTION_LAYERS="arn:aws:function:us-east-1:851725517932:layer:fastify-layer:2 arn:aws:function:us-east-1:851725517932:layer:fastify-aws-function-layer:1"

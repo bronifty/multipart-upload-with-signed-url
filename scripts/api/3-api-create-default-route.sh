@@ -14,4 +14,12 @@ else
     API_ID=$(aws apigatewayv2 get-apis --query "Items[?Name=='${API_NAME}'].ApiId" --output json | jq -r '.[]')
 fi
 
+if [ -z "$2" ]; then
+    echo "No integration id provided. Using default integration id: $DEFAULT_INTEGRATION_ID"
+    INTEGRATION_ID=$DEFAULT_INTEGRATION_ID
+else
+    INTEGRATION_ID=$2
+fi
+
 aws apigatewayv2 create-route --api-id $API_ID --route-key '$default' --target integrations/$INTEGRATION_ID
+

@@ -14,4 +14,4 @@ else
 fi
 
 # Fetch all integrations and filter to get the integration ID
-aws apigatewayv2 get-integrations --api-id $API_ID --region $REGION | jq -r '.Items[] | .IntegrationId'
+aws apigatewayv2 get-integrations --api-id ${API_ID} | jq -r '.Items[] | .IntegrationId'

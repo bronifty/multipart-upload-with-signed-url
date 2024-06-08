@@ -14,5 +14,4 @@ else
     API_ID=$(aws apigatewayv2 get-apis --query "Items[?Name=='${API_NAME}'].ApiId" --output json | jq -r '.[]')
 fi
 
-aws apigatewayv2 create-deployment --api-id ${API_ID} --stage-name default
-
+aws apigatewayv2 create-stage --api-id ${API_ID} --stage-name default --auto-deploy
