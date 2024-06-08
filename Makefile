@@ -69,7 +69,7 @@ api-delete-one:
 	./scripts/api/api-delete-one.sh $(api)
 
 api-delete-all:
-	./scripts/api/api-delete-function.sh
+	./scripts/api/api-delete-all.sh
 
 api-create-integration:
 	./scripts/api/2-api-create-integration.sh $(api) $(function)

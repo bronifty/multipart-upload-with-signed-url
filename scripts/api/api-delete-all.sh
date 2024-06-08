@@ -1,9 +1,7 @@
 #!/bin/bash
-
-# Pipe the output of get_all_apis.sh to api_delete_one.sh to delete all API Gateways
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-
-"$SCRIPT_DIR/api_get_all.sh" | while read API_ID; do
-  echo "Deleting API with ID: $API_ID"
-  "$SCRIPT_DIR/api_delete_one.sh" "$API_ID"
+http_api_ids=$(aws apigatewayv2 get-apis --query 'Items[*].ApiId' --output text)
+# Delete HTTP APIs
+for http_api_id in $http_api_ids; do
+    aws apigatewayv2 delete-api --api-id $http_api_id
+    echo "Deleted HTTP API: $http_api_id"
 done
