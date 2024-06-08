@@ -47,9 +47,23 @@ make api-create-integration api=api function=function
 make api-get-all-integrations api=api
 ```
 
-https://x1k6mt7vgd.execute-api.us-east-1.amazonaws.com/default/function
+9. grant permissions
 
-9. clean up
+```sh
+make api-grant-permissions function=function api=api
+```
+
+https://8w9u272tvf.execute-api.us-east-1.amazonaws.com/function
+
+10. deploy
+
+```sh
+   aws apigatewayv2 create-deployment \
+       --api-id 8w9u272tvf \
+       --stage-name $default
+```
+
+11. clean up
 
 ```sh
 make api-cleanup

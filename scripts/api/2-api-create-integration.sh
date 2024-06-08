@@ -9,6 +9,7 @@ source $SCRIPT_DIR/../variables.sh
 if [ -z "$1" ]; then
     echo "No api name provided. Using default api name: $DEFAULT_API_NAME"
     API_NAME=$DEFAULT_API_NAME
+    API_ID=$(aws apigatewayv2 get-apis --query "Items[?Name=='${API_NAME}'].ApiId" --output json | jq -r '.[]')
 else
     API_NAME=$1
     API_ID=$(aws apigatewayv2 get-apis --query "Items[?Name=='${API_NAME}'].ApiId" --output json | jq -r '.[]')

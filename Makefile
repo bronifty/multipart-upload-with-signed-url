@@ -77,6 +77,9 @@ api-create-integration:
 api-get-all-integrations:
 	./scripts/api/api-get-all-integrations.sh $(api)
 
+api-grant-permissions:
+	./scripts/api/3-api-grant-permissions.sh $(function) $(api)
+
 api-cleanup:
 	./scripts/api/4-api-cleanup.sh
 
