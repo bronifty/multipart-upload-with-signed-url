@@ -35,57 +35,67 @@ make api-add-one api=api function=function
 make api-get-all
 ```
 
-7. make lambda function trigger out of api gateway
+create default route to trigger lambda with http api
 
-```sh
+To create a default route to trigger a Lambda function with an HTTP API in AWS, you can follow these steps:
 
+Deploy a Lambda function that will handle the incoming HTTP requests.
 
-API Gateway: api
-arn:aws:execute-api:us-east-1:851725517932:dkbu6cger5/*/*/function
-API endpoint: https://dkbu6cger5.execute-api.us-east-1.amazonaws.com/function
-Details
-API type: HTTP
-Authorization: NONE
-CORS: No
-Detailed metrics enabled: No
-isComplexStatement: No
-Method: ANY
-Resource path: /function
-Service principal: apigateway.amazonaws.com
-Stage: $default
-Statement ID: lambda-287ae595-528f-4b11-8280-3466de0c6a5b
-```
+Create an AWS API Gateway HTTP API.
 
-8. create api integration
+Define a default route in the HTTP API that will route all incoming requests to the Lambda function.
 
-```sh
-make api-create-integration api=api function=function
-```
+Grant permission to the API Gateway to invoke the Lambda function.
 
-8. get all api integrations
+Here are the detailed steps:
 
-```sh
-make api-get-all-integrations api=api
-```
+Deploy a Lambda Function:
 
-9. grant permissions
+Create a new Lambda function or use an existing one that will handle the incoming HTTP requests.
+Ensure that the Lambda function is configured to handle the desired HTTP methods (e.g., GET, POST, etc.).
+Create an AWS API Gateway HTTP API:
 
-```sh
-make api-grant-permissions function=function api=api
-```
+In the AWS Management Console, navigate to the API Gateway service.
+Create a new HTTP API.
+In the API settings, configure the default route to point to the Lambda function.
+Define a Default Route:
 
-https://8w9u272tvf.execute-api.us-east-1.amazonaws.com/function
+In the HTTP API, create a new route with the path
+/{proxy+}
+.
+Configure the integration type to be "Lambda" and select the Lambda function you deployed in step 1.
+Grant Permission to API Gateway:
 
-10. deploy
+Navigate to the Lambda function in the AWS Management Console.
 
-```sh
-   aws apigatewayv2 create-deployment \
-       --api-id 8w9u272tvf \
-       --stage-name $default
-```
+Add a new permission to the Lambda function's resource policy, allowing the API Gateway service to invoke the function.
 
-11. clean up
+You can use the following AWS CLI command to grant the permission:
 
-```sh
-make api-cleanup
-```
+aws lambda add-permission \
+ --function-name your-lambda-function-name \
+ --statement-id api-gateway-access \
+ --action "lambda:InvokeFunction" \
+ --principal apigateway.amazonaws.com \
+ --source-arn "arn:aws:execute-api:your-region:your-account-id:your-api-id/\*"
+Replace
+your-lambda-function-name
+,
+your-region
+,
+your-account-id
+, and
+your-api-id
+with the appropriate values for your setup.
+
+After completing these steps, your HTTP API will have a default route that will trigger the specified Lambda function for all incoming requests. You can then use the API Gateway endpoint to send requests to your Lambda function.
+
+Remember to refer to the latest AWS documentation for any updates or changes to the specific steps or configuration details.
+
+Sources
+
+[1] [Use API Gateway to invoke a Lambda function - AWS SDK Code Examples](https://docs.aws.amazon.com/code-library/latest/ug/cross_LambdaAPIGateway_python_3_topic.html)
+
+[2] [CreateFunctionUrlConfig - AWS Lambda](https://docs.aws.amazon.com/lambda/latest/api/API_CreateFunctionUrlConfig.html)
+
+[3] [Invoking Lambda function URLs - AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/urls-invocation.html)
