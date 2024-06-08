@@ -78,7 +78,7 @@ api-get-all-integrations:
 	./scripts/api/api-get-all-integrations.sh $(api)
 
 api-cleanup:
-	./scripts/api/3-api-cleanup.sh
+	./scripts/api/4-api-cleanup.sh
 
 
 

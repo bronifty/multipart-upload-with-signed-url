@@ -50,3 +50,7 @@ make api-get-all-integrations api=api
 https://x1k6mt7vgd.execute-api.us-east-1.amazonaws.com/default/function
 
 9. clean up
+
+```sh
+make api-cleanup
+```
