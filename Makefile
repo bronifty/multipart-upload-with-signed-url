@@ -71,6 +71,12 @@ api-delete-one:
 api-delete-all:
 	./scripts/api/api-delete-function.sh
 
+api-create-integration:
+	./scripts/api/2-api-create-integration.sh $(api) $(function)
+
+api-get-integrations:
+	./scripts/api/api-get-integrations.sh $(api)
+
 # engine
 engine-install:
 	pnpm --prefix ./engine install

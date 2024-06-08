@@ -36,3 +36,39 @@ make api-get-all
 ```
 
 7. create api integration
+
+```sh
+make api-create-integration api=api function=function
+```
+
+8. get all api integrations
+
+```sh
+make api-get-integrations api=api
+```
+
+```json
+{
+  "Items": [
+    {
+      "ConnectionType": "INTERNET",
+      "IntegrationId": "4x8z9k9",
+      "IntegrationMethod": "POST",
+      "IntegrationType": "AWS_PROXY",
+      "IntegrationUri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:851725517932:function:function/invocations",
+      "PayloadFormatVersion": "2.0",
+      "TimeoutInMillis": 30000
+    },
+    {
+      "ApiGatewayManaged": true,
+      "ConnectionType": "INTERNET",
+      "IntegrationId": "4yt8bns",
+      "IntegrationMethod": "POST",
+      "IntegrationType": "AWS_PROXY",
+      "IntegrationUri": "arn:aws:lambda:us-east-1:851725517932:function:function",
+      "PayloadFormatVersion": "2.0",
+      "TimeoutInMillis": 30000
+    }
+  ]
+}
+```

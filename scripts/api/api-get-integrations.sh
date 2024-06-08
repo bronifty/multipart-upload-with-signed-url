@@ -14,4 +14,6 @@ else
     API_ID=$(aws apigatewayv2 get-apis --query "Items[?Name=='${API_NAME}'].ApiId" --output json | jq -r '.[]')
 fi
 
-aws apigatewayv2 create-route --api-id $API_ID --route-key '$default' --target integrations/$INTEGRATION_ID
+# aws apigatewayv2 get-integrations --api-id API_ID
+
+aws apigatewayv2 get-integrations --api-id ${API_ID}
