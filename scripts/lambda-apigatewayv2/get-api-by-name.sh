@@ -6,5 +6,5 @@ source $SCRIPT_DIR/../variables.sh
 
 
 API_NAME="api"
-aws apigatewayv2 get-apis --query "Items[?Name=='${API_NAME}']" --output json > $SCRIPT_DIR/output/api_info.json
-
+API_ID=$(aws apigatewayv2 get-apis --query "Items[?Name=='${API_NAME}'].ApiId" --output json | jq -r '.[]')
+echo "API_ID: ${API_ID}"

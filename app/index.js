@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 app.all("*", (req, res) => {
-  res.status(404).send("yes hello this is dog");
+  res.status(404).send("yes hello this is dog!");
 });
 
 // creating routes

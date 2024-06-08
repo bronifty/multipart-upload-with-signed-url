@@ -63,7 +63,7 @@ api-get-one:
 	./scripts/api/api-get-one.sh $(api) 
 
 api-add-one:
-	./scripts/api/api-add-one.sh $(api) $(function)
+	./scripts/api/1-api-add-one.sh $(api) $(function)
 
 api-delete-one:
 	./scripts/api/api-delete-one.sh $(api)

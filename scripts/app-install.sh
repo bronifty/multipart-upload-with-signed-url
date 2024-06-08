@@ -14,7 +14,7 @@ else
 fi
 
 # Clean previous installs
-source $SCRIPT_DIR/clean.sh
+source $SCRIPT_DIR/app-clean.sh
 
 cd $SCRIPT_DIR/../app
 # Install production dependencies
