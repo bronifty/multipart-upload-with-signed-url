@@ -46,6 +46,14 @@ make api-get-all
 make api-grant-permissions api=api function=function
 ```
 
+8. api cleanup
+
+```sh
+make api-cleanup
+```
+
+---
+
 create default route to trigger lambda with http api
 
 To create a default route to trigger a Lambda function with an HTTP API in AWS, you can follow these steps:
