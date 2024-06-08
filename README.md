@@ -5,6 +5,11 @@
 steps:
 
 1. zip a working express app
+
+```sh
+make app-install
+```
+
 2. deploy the function (there are scripts for deploy update and invoke)
 
 ```sh
@@ -33,6 +38,12 @@ make api-add-one api=api function=function
 
 ```sh
 make api-get-all
+```
+
+7. grant permissions
+
+```sh
+make api-grant-permissions api=api function=function
 ```
 
 create default route to trigger lambda with http api
