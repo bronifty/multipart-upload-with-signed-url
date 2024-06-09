@@ -6,6 +6,15 @@ I'm at a fork in the road because I got express working in lambda integrated wit
 
 I have some other generic aws and more specifically aws serverless books I could read or I could trawl the aws docs on the apigateway subject, but that could take a lot of time and I'm not sure if I will even find what I'm looking for. That is, a standardized way of deploying ssr apps with aws on lambda and apigateway as well as using cloudfront cdn as a proxy for both data fetching (GET requests loaded with server routes) and the assets build (vite with remix plugin).
 
+Another note about why I'm not going to try the more general serverless route is they are using the serverless-http framework with which i'm already aware. I don't want to delve any deeper into that it is not solving my issue and I don't want to use a template language like cloudformation or sam to deploy my apps.
+
+While I'm on this road I will check out SST. I created a separate AWS account for it and set up an sso profile, which works alongside my default profile. There are no keys or secrets, only oauth in the browser granting my cli access with a short-lived token. The difference between a request to my default and sst profiles is the addition of the --profile sst flag and value after the command.
+
+```sh
+aws s3 ls # default profile
+aws s3 ls --profile sst # sst profile
+```
+
 ### Notes:
 
 - https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/get-function.html
