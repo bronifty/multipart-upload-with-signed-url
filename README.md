@@ -15,6 +15,10 @@ aws s3 ls # default profile
 aws s3 ls --profile sst # sst profile
 ```
 
+Notably, while I was setting up access to the SST AWS account, I stumbled upon (looked into and got a recommendation from cursor ide which uses chatgpt) a version of the aws cli for s3 that works incredibly well for multipart upload. I would like to use that s3api for the calls around which i will wrap some lightweight javascript to functionalize it and make it calleable from code.
+
+I would like to bundle the cli with this custom sdk wrapping cli calls with js by building the aws cli from source, compiling it to the wasm target and dropping it in a lib folder.
+
 ### Notes:
 
 - https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/get-function.html
