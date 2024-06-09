@@ -25,6 +25,6 @@ else
     BUCKET_NAME=$2  # Set the function name from the first script argument
 fi
 
-echo "aws s3api create-bucket --profile $PROFILE_NAME --bucket $BUCKET_NAME --region $REGION"
-aws s3api create-bucket --profile $PROFILE_NAME --bucket $BUCKET_NAME --region $REGION
+echo "aws s3api list-objects --profile $PROFILE_NAME --bucket $BUCKET_NAME --query 'Contents[].{Key: Key, Size: Size}'"
+aws s3api list-objects --profile $PROFILE_NAME --bucket $BUCKET_NAME --query 'Contents[].{Key: Key, Size: Size}'
 
