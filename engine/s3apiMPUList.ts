@@ -48,7 +48,7 @@ export async function mpuList(config: MPUType): Promise<MPUType[]> {
       throw new Error(`Error fetching data: ${stderr}`);
     }
     const result: MPUListResponse = JSON.parse(stdout);
-    if (!result) {
+    if (!result.Uploads) {
       throw new Error("No result found.");
     }
     const mpuTypes: MPUType[] = result.Uploads.map((upload) => ({
