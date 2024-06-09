@@ -19,6 +19,8 @@ Notably, while I was setting up access to the SST AWS account, I stumbled upon (
 
 I would like to bundle the cli with this custom sdk wrapping cli calls with js by building the aws cli from source, compiling it to the wasm target and dropping it in a lib folder.
 
+I'm going to convert these bash scripts into js functions that call the aws cli to get the multipart upload working (something I've wanted to do for a long time) and then I'll start in with SST and Fastify.
+
 ### Notes:
 
 - https://awscli.amazonaws.com/v2/documentation/api/latest/reference/lambda/get-function.html
