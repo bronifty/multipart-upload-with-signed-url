@@ -1,0 +1,20 @@
+{
+  "name": "aws-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "upload": "tsx index.ts"
+  },
+  "keywords": [],
+  "author": "bronifty",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1637.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "tsx": "^4.15.1",
+    "typescript": "5.5.0-beta"
+  }
+}
