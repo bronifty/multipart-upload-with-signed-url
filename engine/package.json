@@ -12,7 +12,8 @@
     "getResourceArn": "tsx getResourceArn.ts",
     "s3apiMultipartUpload": "tsx s3apiMultipartUpload.ts",
     "s3apiListObjects": "tsx s3apiListObjects.ts",
-    "s3apiGetObject": "tsx s3apiGetObject.ts"
+    "s3apiGetObject": "tsx s3apiGetObject.ts",
+    "s3apiDeleteObject": "tsx s3apiDeleteObject.ts"
   },
   "keywords": [],
   "author": "",
