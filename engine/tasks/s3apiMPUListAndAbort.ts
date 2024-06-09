@@ -62,8 +62,8 @@ async function listAndAbortMPU(config: MPUType): Promise<void> {
 // Example usage:
 async function main() {
   const config: MPUType = {
-    profile: "default",
-    bucket: "example-bucket",
+    profile: "sst",
+    bucket: "bronifty-sst",
     key: "",
     uploadId: "",
   };

@@ -19,6 +19,7 @@
     "s3apiObjectDelete": "tsx s3apiObjectDelete.ts",
     "s3apiObjectGet": "tsx s3apiObjectGet.ts",
     "s3apiObjectsList": "tsx s3apiObjectsList.ts",
+    "s3apiMPUListAndAbort": "tsx ./tasks/s3apiMPUListAndAbort.ts",
     "start": "pnpm compile && node dist/getResourceArn.js"
   },
   "keywords": [],
