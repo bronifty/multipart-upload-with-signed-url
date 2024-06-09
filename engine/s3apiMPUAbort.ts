@@ -37,7 +37,7 @@ type MPUResponse = {
  * @param {MPUType} config - Configuration object containing profile, bucket, keyName, and uploadId.
  * @returns {Promise<MPUType>} - A promise that resolves to the MPUListResponse object.
  */
-export async function mpuCreate(config: MPUType): Promise<MPUType> {
+export async function mpuAbort(config: MPUType): Promise<MPUType> {
   const { profile = "default", bucket, key, uploadId } = config;
 
   // Execute the command and extract the stdout, then trim any extra whitespace
@@ -57,17 +57,18 @@ export async function mpuCreate(config: MPUType): Promise<MPUType> {
     if (stderr) {
       throw new Error(`Error fetching data: ${stderr}`);
     }
-    const result: MPUResponse = JSON.parse(stdout);
+    const result = JSON.parse(stdout);
     if (!result) {
       throw new Error("No result found.");
     }
-    const mpuType: MPUType = {
-      profile,
-      bucket,
-      key: result.Key,
-      uploadId: result.UploadId,
-    };
-    return mpuType;
+    return result;
+    // const mpuType: MPUType = {
+    //   profile,
+    //   bucket,
+    //   key: result.Key,
+    //   uploadId: result.UploadId,
+    // };
+    // return mpuType;
     // const mpuTypes: MPUType[] = result.Uploads.map((upload) => ({
     //   profile,
     //   bucket,
@@ -87,14 +88,15 @@ async function main() {
     profile: "sst",
     bucket: "bronifty-sst",
     key: "multipart/02",
-    uploadId: "",
+    uploadId:
+      "_z0fahejuKxJvy2Oowcn.QgXmKJmfOXiXTn.fqTC14Q_L6LPJ7ODDUwpd.7_kQYER2jmbsL6uIrc.uM0FSB0Um2mHk6bCTNyQcGGKbHqdcVM5.27FNxNpeKZ6_InLXp0",
   };
   try {
-    const result = await mpuCreate(config);
+    const result = await mpuAbort(config);
     // result.forEach((mpu) => {
     //   console.log(mpu);
     // });
-    console.log("MPUReponse in main's then: ", result);
+    console.log("result in main: ", result);
   } catch (error) {
     console.error("Error in main: ", error);
   }
