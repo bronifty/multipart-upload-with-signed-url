@@ -45,6 +45,14 @@ export async function createMultipartUpload(
 }
 
 // Example usage:
-createMultipartUpload("sst", "bronifty-sst", "multipart/01")
+async function main() {
+  const { UploadId } = await createMultipartUpload(
+    "sst",
+    "bronifty-sst",
+    "multipart/01"
+  );
+  return UploadId;
+}
+main()
   .then((objects) => console.log("Objects:", objects))
   .catch((err) => console.error(err));
