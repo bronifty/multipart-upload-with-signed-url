@@ -1,6 +1,6 @@
 import { exec } from "child_process";
 import util from "util";
-import { MPUConfig, MPUResponse } from "./types";
+import { MPUType } from "./types";
 
 const execAsync = util.promisify(exec);
 
@@ -24,23 +24,23 @@ type MPUListResponse = {
 
 /**
  * Generic function to get AWS resource ARN by name.
- * @param {MPUConfig} config - Configuration object containing profileName, bucketName, keyName, and uploadId.
- * @returns {Promise<MPUResponse[]>} - A promise that resolves to the MPUListResponse object.
+ * @param {MPUType} config - Configuration object containing profile, bucket, keyName, and uploadId.
+ * @returns {Promise<MPUType[]>} - A promise that resolves to the MPUListResponse object.
  */
-export async function mpuCreate(config: MPUConfig): Promise<MPUListResponse> {
-  const { profileName = "default", bucketName, keyName, uploadId } = config;
+export async function mpuCreate(config: MPUType): Promise<MPUType[]> {
+  const { profile = "default", bucket, key, uploadId } = config;
 
   // Execute the command and extract the stdout, then trim any extra whitespace
   const regionResult = await execAsync(
-    `aws configure --profile ${profileName} get region --output text`
+    `aws configure --profile ${profile} get region --output text`
   );
   const REGION = regionResult.stdout.trim();
   const accountIdResult = await execAsync(
-    `aws sts --profile ${profileName} get-caller-identity  --query Account --output text`
+    `aws sts --profile ${profile} get-caller-identity  --query Account --output text`
   );
   const ACCOUNT_ID = accountIdResult.stdout.trim();
 
-  const command = `aws s3api list-multipart-uploads --profile ${profileName} --bucket ${bucketName}`;
+  const command = `aws s3api list-multipart-uploads --profile ${profile} --bucket ${bucket}`;
 
   try {
     const { stdout, stderr } = await execAsync(command);
@@ -51,13 +51,13 @@ export async function mpuCreate(config: MPUConfig): Promise<MPUListResponse> {
     if (!result) {
       throw new Error("No result found.");
     }
-    const mpuResponses: MPUResponse[] = result.Uploads.map((upload) => ({
-      ServerSideEncryption: "Not Available", // Placeholder as ServerSideEncryption is not provided in MPUListResponse
-      Bucket: bucketName,
-      Key: upload.Key,
-      UploadId: upload.UploadId,
+    const mpuTypes: MPUType[] = result.Uploads.map((upload) => ({
+      profile,
+      bucket,
+      key: upload.Key,
+      uploadId: upload.UploadId,
     }));
-    return result;
+    return mpuTypes;
   } catch (error) {
     console.error(`Failed to execute command: ${error}`);
     throw error;
@@ -66,35 +66,15 @@ export async function mpuCreate(config: MPUConfig): Promise<MPUListResponse> {
 
 // Example usage:
 async function main() {
-  const config: MPUConfig = {
-    profileName: "sst",
-    bucketName: "bronifty-sst",
-    keyName: "multipart/01",
+  const config: MPUType = {
+    profile: "sst",
+    bucket: "bronifty-sst",
+    key: "multipart/01",
     uploadId: "",
   };
 
   const result = await mpuCreate(config);
-  const uploadsData: { UploadId: string; Key: string }[] = [];
-
-  const uploads = result.Uploads;
-  if (uploads && Array.isArray(uploads)) {
-    uploads.forEach((upload) => {
-      const { UploadId, Key } = upload;
-      if (UploadId && Key) {
-        uploadsData.push({ UploadId, Key });
-      }
-    });
-  }
-  console.log(uploadsData);
-  return {
-    profileName,
-    bucketName,
-    keyName: uploadsData[0].Key,
-    uploadId: uploadsData[0].UploadId,
-  };
 }
 main()
-  .then((MPUResponse) =>
-    console.log("MPUReponse in main's then: ", MPUResponse)
-  )
+  .then((mpuType) => console.log("MPUReponse in main's then: ", mpuType))
   .catch((err) => console.error("Error in catch: ", err));

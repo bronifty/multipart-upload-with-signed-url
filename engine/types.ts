@@ -1,12 +1,6 @@
-export type MPUResponse = {
-  Bucket: string;
-  Key: string;
-  UploadId: string;
-};
-
-export type MPUConfig = {
-  profileName: string;
-  bucketName: string;
-  keyName: string;
+export type MPUType = {
+  profile: string;
+  bucket: string;
+  key: string;
   uploadId: string;
 };
