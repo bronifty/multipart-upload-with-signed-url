@@ -39,6 +39,6 @@ else
     LOCAL_FILE_NAME=$4
 fi
 
-
+echo "aws s3api get-object --profile $PROFILE_NAME --bucket $BUCKET_NAME --key $KEY_NAME $LOCAL_FILE_NAME"
 aws s3api get-object --profile $PROFILE_NAME --bucket $BUCKET_NAME --key $KEY_NAME $LOCAL_FILE_NAME
 
