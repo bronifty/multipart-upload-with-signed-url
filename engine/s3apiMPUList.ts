@@ -49,7 +49,7 @@ async function main() {
     uploadId: "",
   };
   const MPUResponse = await mpuCreate(config);
-  console.log("MPUReponse: ", MPUResponse);
+  //   console.log("MPUReponse: ", MPUResponse);
   return MPUResponse;
 }
 main()
