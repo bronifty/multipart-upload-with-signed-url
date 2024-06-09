@@ -3,12 +3,19 @@ import util from "util";
 
 const execAsync = util.promisify(exec);
 
+type MultipartUploadResponse = {
+  ServerSideEncryption: string;
+  Bucket: string;
+  Key: string;
+  UploadId: string;
+};
+
 /**
  * Generic function to get AWS resource ARN by name.
  * @param {string} profileName - Name of the profile.
  * @param {string} bucketName - Name of the bucket.
  * @param {string} keyName - Name of the key.
- * @returns {Promise<string>} - A promise that resolves to the ARN of the resource.
+ * @returns {Promise<MultipartUploadResponse>} - A promise that resolves to the ARN of the resource.
  */
 
 export async function createMultipartUpload(
