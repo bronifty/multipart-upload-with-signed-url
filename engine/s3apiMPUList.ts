@@ -27,7 +27,7 @@ type MPUListResponse = {
  * @param {MPUType} config - Configuration object containing profile, bucket, keyName, and uploadId.
  * @returns {Promise<MPUType[]>} - A promise that resolves to the MPUListResponse object.
  */
-export async function mpuCreate(config: MPUType): Promise<MPUType[]> {
+export async function mpuList(config: MPUType): Promise<MPUType[]> {
   const { profile = "default", bucket, key, uploadId } = config;
 
   // Execute the command and extract the stdout, then trim any extra whitespace
@@ -73,7 +73,7 @@ async function main() {
     uploadId: "",
   };
   try {
-    const result = await mpuCreate(config);
+    const result = await mpuList(config);
     result.forEach((mpu) => {
       console.log(mpu);
     });
