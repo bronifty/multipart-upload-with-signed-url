@@ -1,6 +1,6 @@
 import { exec } from "child_process";
 import util from "util";
-
+import { existsSync, mkdirSync } from "fs";
 const execAsync = util.promisify(exec);
 
 /**
@@ -47,6 +47,11 @@ export async function getObject(
 }
 
 // Example usage:
+
+// Check if the './data' directory exists, if not create it
+if (!existsSync("./data")) {
+  mkdirSync("./data");
+}
 
 getObject("sst", "bronifty-sst", "multipart/01", "./data/mpu.zip")
   .then((objects) => console.log("Objects:", objects))
