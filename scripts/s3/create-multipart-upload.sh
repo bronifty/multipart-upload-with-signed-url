@@ -25,7 +25,7 @@ else
     BUCKET_NAME=$2  # Set the function name from the first script argument
 fi
 
-aws s3api create-multipart-upload --profile $PROFILE_NAME --bucket $BUCKET_NAME --key 'multipart/01' --region $REGION
+aws s3api create-multipart-upload --profile $PROFILE_NAME --bucket $BUCKET_NAME --key 'multipart/01'
 
 # {
 #     "ServerSideEncryption": "AES256",

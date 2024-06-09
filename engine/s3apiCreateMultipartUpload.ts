@@ -8,15 +8,13 @@ const execAsync = util.promisify(exec);
  * @param {string} profileName - Name of the profile.
  * @param {string} bucketName - Name of the bucket.
  * @param {string} keyName - Name of the key.
- * @param {string} localFileName - Name of the local file.
  * @returns {Promise<string>} - A promise that resolves to the ARN of the resource.
  */
 
-export async function getObject(
+export async function createMultipartUpload(
   profileName: string = "default",
   bucketName: string,
-  keyName: string,
-  localFileName: string
+  keyName: string
 ) {
   //   let command;
   // Execute the command and extract the stdout, then trim any extra whitespace
@@ -28,7 +26,7 @@ export async function getObject(
     "aws sts get-caller-identity --query Account --output text"
   );
   const ACCOUNT_ID = accountIdResult.stdout.trim();
-  const command = `aws s3api create-multipart-upload --profile ${profileName} --bucket ${bucketName} --key '${keyName}' --region ${REGION}`;
+  const command = `aws s3api create-multipart-upload --profile ${profileName} --bucket ${bucketName} --key '${keyName}'`;
 
   try {
     const { stdout, stderr } = await execAsync(command);
@@ -47,7 +45,6 @@ export async function getObject(
 }
 
 // Example usage:
-
-getObject("sst", "bronifty-sst", "multipart/01", "./data/mpu.zip")
+createMultipartUpload("sst", "bronifty-sst", "multipart/01")
   .then((objects) => console.log("Objects:", objects))
   .catch((err) => console.error(err));
