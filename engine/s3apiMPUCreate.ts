@@ -22,12 +22,22 @@ type MPUListResponse = {
   RequestCharged: null;
 };
 
+type MPUResponse = {
+  UploadId: string;
+  Key: string;
+  Initiated: string;
+  StorageClass: string;
+  Owner: {
+    ID: string;
+  };
+};
+
 /**
  * Generic function to get AWS resource ARN by name.
  * @param {MPUType} config - Configuration object containing profile, bucket, keyName, and uploadId.
- * @returns {Promise<MPUType[]>} - A promise that resolves to the MPUListResponse object.
+ * @returns {Promise<MPUType>} - A promise that resolves to the MPUListResponse object.
  */
-export async function mpuCreate(config: MPUType): Promise<MPUType[]> {
+export async function mpuCreate(config: MPUType): Promise<MPUType> {
   const { profile = "default", bucket, key, uploadId } = config;
 
   // Execute the command and extract the stdout, then trim any extra whitespace
@@ -47,17 +57,24 @@ export async function mpuCreate(config: MPUType): Promise<MPUType[]> {
     if (stderr) {
       throw new Error(`Error fetching data: ${stderr}`);
     }
-    const result: MPUListResponse = JSON.parse(stdout);
+    const result: MPUResponse = JSON.parse(stdout);
     if (!result) {
       throw new Error("No result found.");
     }
-    const mpuTypes: MPUType[] = result.Uploads.map((upload) => ({
+    const mpuType: MPUType = {
       profile,
       bucket,
-      key: upload.Key,
-      uploadId: upload.UploadId,
-    }));
-    return mpuTypes;
+      key: result.Key,
+      uploadId: result.UploadId,
+    };
+    return mpuType;
+    // const mpuTypes: MPUType[] = result.Uploads.map((upload) => ({
+    //   profile,
+    //   bucket,
+    //   key: upload.Key,
+    //   uploadId: upload.UploadId,
+    // }));
+    // return mpuTypes;
   } catch (error) {
     console.error(`Failed to execute command: ${error}`);
     throw error;
@@ -69,14 +86,15 @@ async function main() {
   const config: MPUType = {
     profile: "sst",
     bucket: "bronifty-sst",
-    key: "multipart/01",
+    key: "multipart/02",
     uploadId: "",
   };
   try {
     const result = await mpuCreate(config);
-    result.forEach((mpu) => {
-      console.log(mpu);
-    });
+    // result.forEach((mpu) => {
+    //   console.log(mpu);
+    // });
+    console.log("MPUReponse in main's then: ", result);
   } catch (error) {
     console.error("Error in main: ", error);
   }
