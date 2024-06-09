@@ -1,15 +1,33 @@
 import { exec } from "child_process";
 import util from "util";
-import { MPUConfig, MPUResponse } from "./types";
+import { MPUConfig } from "./types";
 
 const execAsync = util.promisify(exec);
+
+type MPUListResponse = {
+  Uploads: [
+    {
+      UploadId: string;
+      Key: string;
+      Initiated: string;
+      StorageClass: string;
+      Owner: {
+        ID: string;
+      };
+      Initiator: {
+        ID: string;
+      };
+    }
+  ];
+  RequestCharged: null;
+};
 
 /**
  * Generic function to get AWS resource ARN by name.
  * @param {MPUConfig} config - Configuration object containing profileName, bucketName, keyName, and uploadId.
- * @returns {Promise<MPUResponse>} - A promise that resolves to the MPUResponse object.
+ * @returns {Promise<MPUListResponse>} - A promise that resolves to the MPUListResponse object.
  */
-export async function mpuCreate(config: MPUConfig): Promise<MPUResponse> {
+export async function mpuCreate(config: MPUConfig): Promise<MPUListResponse> {
   const { profileName = "default", bucketName, keyName, uploadId } = config;
 
   // Execute the command and extract the stdout, then trim any extra whitespace
@@ -29,7 +47,7 @@ export async function mpuCreate(config: MPUConfig): Promise<MPUResponse> {
     if (stderr) {
       throw new Error(`Error fetching data: ${stderr}`);
     }
-    const result: MPUResponse = JSON.parse(stdout);
+    const result: MPUListResponse = JSON.parse(stdout);
     if (!result) {
       throw new Error("No result found.");
     }
@@ -48,9 +66,20 @@ async function main() {
     keyName: "multipart/01",
     uploadId: "",
   };
-  const MPUResponse = await mpuCreate(config);
-  //   console.log("MPUReponse: ", MPUResponse);
-  return MPUResponse;
+
+  const result = await mpuCreate(config);
+  const uploadsData: { UploadId: string; Key: string }[] = [];
+
+  const uploads = result.Uploads;
+  if (uploads && Array.isArray(uploads)) {
+    uploads.forEach((upload) => {
+      const { UploadId, Key } = upload;
+      if (UploadId && Key) {
+        uploadsData.push({ UploadId, Key });
+      }
+    });
+  }
+  console.log(uploadsData);
 }
 main()
   .then((MPUResponse) =>
