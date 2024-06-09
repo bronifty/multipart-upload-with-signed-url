@@ -1,6 +1,6 @@
 import { exec } from "child_process";
 import util from "util";
-import { MPUConfig } from "./types";
+import { MPUConfig, MPUResponse } from "./types";
 
 const execAsync = util.promisify(exec);
 
@@ -25,7 +25,7 @@ type MPUListResponse = {
 /**
  * Generic function to get AWS resource ARN by name.
  * @param {MPUConfig} config - Configuration object containing profileName, bucketName, keyName, and uploadId.
- * @returns {Promise<MPUListResponse>} - A promise that resolves to the MPUListResponse object.
+ * @returns {Promise<MPUResponse[]>} - A promise that resolves to the MPUListResponse object.
  */
 export async function mpuCreate(config: MPUConfig): Promise<MPUListResponse> {
   const { profileName = "default", bucketName, keyName, uploadId } = config;
@@ -51,6 +51,12 @@ export async function mpuCreate(config: MPUConfig): Promise<MPUListResponse> {
     if (!result) {
       throw new Error("No result found.");
     }
+    const mpuResponses: MPUResponse[] = result.Uploads.map((upload) => ({
+      ServerSideEncryption: "Not Available", // Placeholder as ServerSideEncryption is not provided in MPUListResponse
+      Bucket: bucketName,
+      Key: upload.Key,
+      UploadId: upload.UploadId,
+    }));
     return result;
   } catch (error) {
     console.error(`Failed to execute command: ${error}`);
@@ -80,6 +86,12 @@ async function main() {
     });
   }
   console.log(uploadsData);
+  return {
+    profileName,
+    bucketName,
+    keyName: uploadsData[0].Key,
+    uploadId: uploadsData[0].UploadId,
+  };
 }
 main()
   .then((MPUResponse) =>

@@ -1,15 +1,8 @@
 import { exec } from "child_process";
 import util from "util";
-import { MPUConfig } from "./types";
+import { MPUConfig, MPUResponse } from "./types";
 
 const execAsync = util.promisify(exec);
-
-type MPUResponse = {
-  ServerSideEncryption: string;
-  Bucket: string;
-  Key: string;
-  UploadId: string;
-};
 
 /**
  * Generic function to get AWS resource ARN by name.
