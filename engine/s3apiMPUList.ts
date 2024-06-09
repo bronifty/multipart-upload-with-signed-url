@@ -57,7 +57,6 @@ export async function mpuCreate(config: MPUType): Promise<MPUType[]> {
       key: upload.Key,
       uploadId: upload.UploadId,
     }));
-    console.log("mpuTypes: ", mpuTypes);
     return mpuTypes;
   } catch (error) {
     console.error(`Failed to execute command: ${error}`);
@@ -73,9 +72,13 @@ async function main() {
     key: "multipart/01",
     uploadId: "",
   };
-
-  const result = await mpuCreate(config);
+  try {
+    const result = await mpuCreate(config);
+    result.forEach((mpu) => {
+      console.log(mpu);
+    });
+  } catch (error) {
+    console.error("Error in main: ", error);
+  }
 }
-main()
-  .then((mpuType) => console.log("MPUReponse in main's then: ", mpuType))
-  .catch((err) => console.error("Error in catch: ", err));
+main();
