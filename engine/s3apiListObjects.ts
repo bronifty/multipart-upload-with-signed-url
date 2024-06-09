@@ -5,16 +5,16 @@ const execAsync = util.promisify(exec);
 
 /**
  * Generic function to get AWS resource ARN by name.
- * @param {string} resourceType - Type of the resource ('api' or 'lambda').
- * @param {string} resourceName - Name of the resource.
+ * @param {string} profileName - Name of the profile.
+ * @param {string} bucketName - Name of the bucket.
  * @returns {Promise<string>} - A promise that resolves to the ARN of the resource.
  */
 
 export async function listObjects(
-  resourceType: "lambda" | "api",
-  resourceName: string
+  profileName: string = "default",
+  bucketName: string
 ) {
-  let command;
+  //   let command;
   // Execute the command and extract the stdout, then trim any extra whitespace
   const regionResult = await execAsync(
     "aws configure get region --output text"
@@ -24,17 +24,8 @@ export async function listObjects(
     "aws sts get-caller-identity --query Account --output text"
   );
   const ACCOUNT_ID = accountIdResult.stdout.trim();
+  const command = `aws s3api list-objects --profile ${profileName} --bucket ${bucketName} --query 'Contents[].{Key: Key, Size: Size}'`;
 
-  switch (resourceType) {
-    case "api":
-      command = `aws apigatewayv2 get-apis --query "Items[?Name=='${resourceName}'].ApiId" --output json`;
-      break;
-    case "lambda":
-      command = `aws lambda get-function --function-name ${resourceName} --query "Configuration.FunctionArn" --output json`;
-      break;
-    default:
-      throw new Error('Unsupported resource type. Use "api" or "lambda".');
-  }
   try {
     const { stdout, stderr } = await execAsync(command);
     if (stderr) {
@@ -44,14 +35,7 @@ export async function listObjects(
     if (resultArray.length === 0) {
       throw new Error("No results found.");
     }
-    switch (resourceType) {
-      case "api":
-        return `arn:aws:apigateway:${REGION}::${ACCOUNT_ID}:/apis/${resultArray[0]}`;
-      case "lambda":
-        return resultArray;
-      default:
-        throw new Error('Unsupported resource type. Use "api" or "lambda".');
-    }
+    return resultArray;
   } catch (error) {
     console.error(`Failed to execute command: ${error}`);
     throw error;
@@ -59,10 +43,7 @@ export async function listObjects(
 }
 
 // Example usage:
-listObjects("lambda", "function")
-  .then((arn) => console.log("Lambda ARN:", arn))
-  .catch((err) => console.error(err));
 
-listObjects("api", "api")
-  .then((apiArn) => console.log("API ARN:", apiArn))
+listObjects("sst", "bronifty-sst")
+  .then((objects) => console.log("Objects:", objects))
   .catch((err) => console.error(err));
