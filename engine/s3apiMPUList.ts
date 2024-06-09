@@ -57,6 +57,7 @@ export async function mpuCreate(config: MPUType): Promise<MPUType[]> {
       key: upload.Key,
       uploadId: upload.UploadId,
     }));
+    console.log("mpuTypes: ", mpuTypes);
     return mpuTypes;
   } catch (error) {
     console.error(`Failed to execute command: ${error}`);
