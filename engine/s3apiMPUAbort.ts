@@ -14,13 +14,14 @@ export async function mpuAbort(config: MPUConfig): Promise<MPUResponse> {
 
   // Execute the command and extract the stdout, then trim any extra whitespace
   const regionResult = await execAsync(
-    "aws configure get region --output text"
+    `aws configure --profile ${profileName} get region --output text`
   );
   const REGION = regionResult.stdout.trim();
   const accountIdResult = await execAsync(
-    "aws sts get-caller-identity --query Account --output text"
+    `aws sts --profile ${profileName} get-caller-identity  --query Account --output text`
   );
   const ACCOUNT_ID = accountIdResult.stdout.trim();
+
   const command = `aws s3api abort-multipart-upload --profile ${profileName} --bucket ${bucketName} --key ${keyName} --upload-id ${uploadId}`;
 
   try {

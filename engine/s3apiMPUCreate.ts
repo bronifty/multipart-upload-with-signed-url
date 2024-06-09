@@ -10,17 +10,18 @@ const execAsync = util.promisify(exec);
  * @returns {Promise<MPUResponse>} - A promise that resolves to the MPUResponse object.
  */
 export async function mpuCreate(config: MPUConfig): Promise<MPUResponse> {
-  const { profileName = "default", bucketName, keyName } = config;
+  const { profileName = "default", bucketName, keyName, uploadId } = config;
 
   // Execute the command and extract the stdout, then trim any extra whitespace
   const regionResult = await execAsync(
-    "aws configure get region --output text"
+    `aws configure --profile ${profileName} get region --output text`
   );
   const REGION = regionResult.stdout.trim();
   const accountIdResult = await execAsync(
-    "aws sts get-caller-identity --query Account --output text"
+    `aws sts --profile ${profileName} get-caller-identity  --query Account --output text`
   );
   const ACCOUNT_ID = accountIdResult.stdout.trim();
+
   const command = `aws s3api create-multipart-upload --profile ${profileName} --bucket ${bucketName} --key '${keyName}'`;
 
   try {
