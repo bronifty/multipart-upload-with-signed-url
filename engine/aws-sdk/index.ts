@@ -1,5 +1,6 @@
 const AWS = require("aws-sdk");
-
+const fs = require("fs");
+const path = require("path");
 // AWS.config.update({
 //   accessKeyId: "YOUR_ACCESS_KEY_ID",
 //   secretAccessKey: "YOUR_SECRET_ACCESS_KEY",
@@ -74,9 +75,6 @@ function completeMultipartUpload(
   });
 }
 
-const fs = require("fs");
-const path = require("path");
-
 async function uploadFile(filePath: string, bucket: string, key: string) {
   const fileSize = fs.statSync(filePath).size;
   const partSize = 5 * 1024 * 1024; // 5MB
@@ -103,7 +101,7 @@ async function uploadFile(filePath: string, bucket: string, key: string) {
 
 // Usage
 uploadFile(
-  "/Users/bro/codes/fastify/aws-cli-wrapper/engine/data/mpuArchive01.zip",
+  "/Users/bro/Downloads/Archive.zip",
   "bronifty-sst",
-  "mpuArchive01.zip"
+  "/Users/bro/Downloads/Archive.zip"
 );

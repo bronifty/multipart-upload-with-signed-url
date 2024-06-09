@@ -50,7 +50,7 @@ export async function s3apiObjectGet(config: MPUType): Promise<void> {
   );
   const ACCOUNT_ID = accountIdResult.stdout.trim();
 
-  const command = `aws s3api get-object --profile ${profile} --bucket ${bucket} --key ${key} "./data/${key}"`;
+  const command = `aws s3api get-object --profile ${profile} --bucket ${bucket} --key ${key} ${key}`;
 
   try {
     const { stdout, stderr } = await execAsync(command);
@@ -88,7 +88,7 @@ async function main() {
   const config: MPUType = {
     profile: "sst",
     bucket: "bronifty-sst",
-    key: "mpuArchive01.zip",
+    key: "/Users/bro/Downloads/Archive.zip",
     uploadId: "",
   };
   try {
