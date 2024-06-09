@@ -87,9 +87,9 @@ async function main() {
   const config: MPUType = {
     profile: "sst",
     bucket: "bronifty-sst",
-    key: "multipart/02",
+    key: "temp.zip",
     uploadId:
-      "_z0fahejuKxJvy2Oowcn.QgXmKJmfOXiXTn.fqTC14Q_L6LPJ7ODDUwpd.7_kQYER2jmbsL6uIrc.uM0FSB0Um2mHk6bCTNyQcGGKbHqdcVM5.27FNxNpeKZ6_InLXp0",
+      "ujKtMtIRb6dyzkUvGu1qJgbIUkdvYHET5Vp_tCm8jJVIrqBFZZ1X7eB8tYFCF2KJ_.RK5BZp6N97C68VNCjdoHHMN6IafC7EsEV4x1zhBXvU506B7ODNaHsyfr._1WOh",
   };
   try {
     const result = await mpuAbort(config);

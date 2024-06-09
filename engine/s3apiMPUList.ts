@@ -49,7 +49,7 @@ export async function mpuList(config: MPUType): Promise<MPUType[]> {
     }
     const result: MPUListResponse = JSON.parse(stdout);
     if (!result.Uploads) {
-      throw new Error("No result found.");
+      return [];
     }
     const mpuTypes: MPUType[] = result.Uploads.map((upload) => ({
       profile,
