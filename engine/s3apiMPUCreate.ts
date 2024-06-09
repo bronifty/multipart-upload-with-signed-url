@@ -1,29 +1,17 @@
 import { exec } from "child_process";
 import util from "util";
+import { MPUConfig, MPUResponse } from "./types";
 
 const execAsync = util.promisify(exec);
 
-type MultipartUploadResponse = {
-  ServerSideEncryption: string;
-  Bucket: string;
-  Key: string;
-  UploadId: string;
-};
-
 /**
  * Generic function to get AWS resource ARN by name.
- * @param {string} profileName - Name of the profile.
- * @param {string} bucketName - Name of the bucket.
- * @param {string} keyName - Name of the key.
- * @returns {Promise<MultipartUploadResponse>} - A promise that resolves to the ARN of the resource.
+ * @param {MPUConfig} config - Configuration object containing profileName, bucketName, keyName, and uploadId.
+ * @returns {Promise<MPUResponse>} - A promise that resolves to the MPUResponse object.
  */
+export async function mpuCreate(config: MPUConfig): Promise<MPUResponse> {
+  const { profileName = "default", bucketName, keyName } = config;
 
-export async function createMultipartUpload(
-  profileName: string = "default",
-  bucketName: string,
-  keyName: string
-) {
-  //   let command;
   // Execute the command and extract the stdout, then trim any extra whitespace
   const regionResult = await execAsync(
     "aws configure get region --output text"
@@ -40,11 +28,11 @@ export async function createMultipartUpload(
     if (stderr) {
       throw new Error(`Error fetching data: ${stderr}`);
     }
-    const resultArray = JSON.parse(stdout);
-    if (resultArray.length === 0) {
-      throw new Error("No results found.");
+    const result: MPUResponse = JSON.parse(stdout);
+    if (!result.UploadId) {
+      throw new Error("No UploadId found.");
     }
-    return resultArray;
+    return result;
   } catch (error) {
     console.error(`Failed to execute command: ${error}`);
     throw error;
@@ -53,13 +41,18 @@ export async function createMultipartUpload(
 
 // Example usage:
 async function main() {
-  const { UploadId } = await createMultipartUpload(
-    "sst",
-    "bronifty-sst",
-    "multipart/01"
-  );
-  return UploadId;
+  const config: MPUConfig = {
+    profileName: "sst",
+    bucketName: "bronifty-sst",
+    keyName: "multipart/01",
+    uploadId: "",
+  };
+  const MPUResponse = await mpuCreate(config);
+  console.log("MPUReponse: ", MPUResponse);
+  return MPUResponse;
 }
 main()
-  .then((objects) => console.log("Objects:", objects))
-  .catch((err) => console.error(err));
+  .then((MPUResponse) =>
+    console.log("MPUReponse in main's then: ", MPUResponse)
+  )
+  .catch((err) => console.error("Error in catch: ", err));
