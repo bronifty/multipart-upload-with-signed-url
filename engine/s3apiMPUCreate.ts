@@ -86,7 +86,7 @@ async function main() {
   const config: MPUType = {
     profile: "sst",
     bucket: "bronifty-sst",
-    key: "multipart/02",
+    key: "mpuArchive02.zip",
     uploadId: "",
   };
   try {
