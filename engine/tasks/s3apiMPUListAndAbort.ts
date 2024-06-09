@@ -27,7 +27,7 @@ type MPUListResponse = {
  * @param {MPUType} config - Configuration object containing profile and bucket.
  */
 async function listAndAbortMPU(config: MPUType): Promise<void> {
-  const { profile = "default", bucket } = config;
+  const { profile = "default", bucket, key, uploadId } = config;
 
   // List multipart uploads
   const listCommand = `aws s3api list-multipart-uploads --profile ${profile} --bucket ${bucket}`;
