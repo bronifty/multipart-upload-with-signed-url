@@ -5,6 +5,7 @@
 # export NATS_CLI_VERSION="0.1.3"
 # export GOLANG_VERSION="1.22.0"
 # export ARCH="$(uname -m)"
+export DEFAULT_PROFILE_NAME="default"
 export DEFAULT_FUNCTION_NAME="function"
 export DEFAULT_API_NAME="api"
 export DEFAULT_INTEGRATION_ID="4x8z9k9"
