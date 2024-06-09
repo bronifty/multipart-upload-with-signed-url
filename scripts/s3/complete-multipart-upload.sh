@@ -25,4 +25,6 @@ else
     BUCKET_NAME=$2  # Set the function name from the first script argument
 fi
 
-aws s3api complete-multipart-upload --multipart-upload file://mpustruct --bucket my-bucket --key 'multipart/01' --upload-id dfRtDYU0WWCCcH43C3WFbkRONycyCpTJJvxu2i5GYkZljF.Yxwh6XG7WfS2vC4to6HiV6Yjlx.cph0gtNBtJ8P3URCSbB7rjxI5iEwVDmgaXZOGgkk5nVTW16HOQ5l0R
+echo "aws s3api complete-multipart-upload --multipart-upload file://$SCRIPT_DIR/mpustruct --bucket $BUCKET_NAME --key 'multipart/01' --upload-id MECpkMFSkqJhKOja6i0EkGKax1avQY90hyMFuf61g_tPC0mIttxNYrQ0k3d0A1ghrNHzpA9274asd92dHn1gmK1RpmvJg0.fSMY0aVSXBAPTV2VvGrTqQcLo47_ZDUOe"
+aws s3api complete-multipart-upload --multipart-upload file://$SCRIPT_DIR/mpustruct --bucket $BUCKET_NAME --key 'multipart/01' --upload-id MECpkMFSkqJhKOja6i0EkGKax1avQY90hyMFuf61g_tPC0mIttxNYrQ0k3d0A1ghrNHzpA9274asd92dHn1gmK1RpmvJg0.fSMY0aVSXBAPTV2VvGrTqQcLo47_ZDUOe
+
