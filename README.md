@@ -30,9 +30,9 @@
 
 ### TODO
 
-- [accelerating server side development with fastify](https://read.amazon.com/?asin=B0B2PR8RQY&ref_=kwl_kr_iv_rec_16)
-- [aws-sdkv3-js-notes-app](https://github.com/aws-samples/aws-sdk-js-notes-app)
 - [cloudfront-hosting-toolkit](https://blog.awsfundamentals.com/cloudfront-hosting-toolkit?utm_source=pocket_shared)
+- [aws-sdkv3-js-notes-app](https://github.com/aws-samples/aws-sdk-js-notes-app)
+- [accelerating server side development with fastify](https://read.amazon.com/?asin=B0B2PR8RQY&ref_=kwl_kr_iv_rec_16)
 - [embed-wasm-blob](https://webreflection.medium.com/how-to-embed-your-wasm-blob-c29692119039)
 
 ---
