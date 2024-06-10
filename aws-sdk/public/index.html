@@ -3,14 +3,74 @@
   <head>
     <meta charset="UTF-8" />
     <title>Multipart Upload</title>
+    <style>
+      #dropZone {
+        border: 2px dashed #ccc;
+        border-radius: 5px;
+        width: 300px;
+        height: 100px;
+        text-align: center;
+        line-height: 100px;
+        color: #ccc;
+        margin: 20px;
+        cursor: pointer; /* Indicates the drop zone is clickable */
+      }
+      #dropZone.hover {
+        background-color: #f0f0f0;
+      }
+      #fileName {
+        display: block;
+        margin-top: 10px;
+        color: #666;
+      }
+    </style>
   </head>
   <body>
     <script type="module" src="uploadScript.js"></script>
-    <input type="file" id="fileInput" />
+    <div id="dropZone">Drag and drop your file here or click to select</div>
+    <span id="fileName"></span>
+    <input type="file" id="fileInput" style="display: none" />
     <input type="text" id="bucketInput" placeholder="Enter bucket name" />
     <button id="uploadButton">Upload</button>
     <script type="module">
       import { hello, uploadFile } from "./uploadScript.js";
+
+      const dropZone = document.getElementById("dropZone");
+      const fileInput = document.getElementById("fileInput");
+      const fileNameDisplay = document.getElementById("fileName");
+
+      dropZone.addEventListener("click", () => {
+        fileInput.click();
+      });
+
+      fileInput.addEventListener("change", () => {
+        if (fileInput.files.length > 0) {
+          fileNameDisplay.textContent = `Selected file: ${fileInput.files[0].name}`;
+        }
+      });
+
+      dropZone.addEventListener("dragover", (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        event.dataTransfer.dropEffect = "copy";
+        dropZone.classList.add("hover");
+      });
+
+      dropZone.addEventListener("dragleave", (event) => {
+        dropZone.classList.remove("hover");
+      });
+
+      dropZone.addEventListener("drop", (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        dropZone.classList.remove("hover");
+        const files = event.dataTransfer.files;
+        if (files.length) {
+          fileInput.files = files;
+          fileNameDisplay.textContent = `Selected file: ${files[0].name}`;
+        }
+      });
+
       document.querySelector("#uploadButton").addEventListener("click", () => {
         hello();
         const bucket = document.getElementById("bucketInput").value;
