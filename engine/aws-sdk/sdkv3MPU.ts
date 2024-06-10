@@ -71,7 +71,7 @@ const config = {
   profile: "sst",
   bucket: "bronifty-sst",
   key: "Archive.zip",
-  filepath: "/Users/bronifty/Downloads/Archive.zip",
-  readable: fs.createReadStream("/Users/bronifty/Downloads/Archive.zip"),
+  filepath: "/Users/bro/Downloads/Archive.zip",
+  readable: fs.createReadStream("/Users/bro/Downloads/Archive.zip"),
 };
 multipartUploadExample(config);

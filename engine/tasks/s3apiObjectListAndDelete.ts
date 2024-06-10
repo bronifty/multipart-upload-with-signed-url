@@ -4,24 +4,6 @@ import { MPUType } from "../types";
 
 const execAsync = util.promisify(exec);
 
-// type MPUListResponse = {
-//   Uploads: [
-//     {
-//       UploadId: string;
-//       Key: string;
-//       Initiated: string;
-//       StorageClass: string;
-//       Owner: {
-//         ID: string;
-//       };
-//       Initiator: {
-//         ID: string;
-//       };
-//     }
-//   ];
-//   RequestCharged: null;
-// };
-
 type FileListResponse = [
   {
     Key: string;
