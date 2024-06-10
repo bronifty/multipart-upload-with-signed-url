@@ -1,11 +1,11 @@
-export async function uploadFile() {
+export async function uploadFile(bucket) {
   console.log("uploadFile() called");
   const fileInput = document.getElementById("fileInput");
   const file = fileInput.files[0];
+  const key = file.name; // Use the file's name as the key
+
   const partSize = 5 * 1024 * 1024; // 5 MB per part
   const totalParts = Math.ceil(file.size / partSize);
-  const bucket = "bronifty-sst"; // Specify your bucket name
-  const key = "Archive.zip"; // Specify the object key, e.g., 'uploads/file.zip'
 
   // Request presigned URLs from the server
   const presignedUrlResponse = await fetch(
@@ -46,8 +46,6 @@ export async function uploadFile() {
       },
     });
 
-    console.log(uploadResponse.headers); // Log headers to see what's included
-
     if (!uploadResponse.ok) {
       throw new Error(
         "Upload failed for part " +
@@ -58,7 +56,6 @@ export async function uploadFile() {
     }
 
     const etag = uploadResponse.headers.get("ETag");
-    console.log(`ETag for part ${i + 1}:`, etag); // Check the ETag value
     parts.push({ ETag: etag, PartNumber: i + 1 });
   }
 
