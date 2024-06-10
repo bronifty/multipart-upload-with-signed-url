@@ -3,7 +3,8 @@
     {
       "AllowedOrigins": ["*"],
       "AllowedMethods": ["GET", "PUT", "POST", "DELETE"],
-      "AllowedHeaders": ["*"]
+      "AllowedHeaders": ["*"],
+      "ExposeHeaders": ["ETag"]
     }
   ]
 }

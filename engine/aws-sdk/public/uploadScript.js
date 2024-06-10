@@ -46,6 +46,8 @@ export async function uploadFile() {
       },
     });
 
+    console.log(uploadResponse.headers); // Log headers to see what's included
+
     if (!uploadResponse.ok) {
       throw new Error(
         "Upload failed for part " +
@@ -55,8 +57,8 @@ export async function uploadFile() {
       );
     }
 
-    // collect ETag from response header
     const etag = uploadResponse.headers.get("ETag");
+    console.log(`ETag for part ${i + 1}:`, etag); // Check the ETag value
     parts.push({ ETag: etag, PartNumber: i + 1 });
   }
 
