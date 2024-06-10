@@ -1,8 +1,4 @@
-# AWS Serverless Toolbelt
-
----
-
-### Multipart Upload with Signed URLs from the Browser hitting a nodejs server backend
+# Multipart Upload with Signed URLs from the Browser hitting a nodejs server backend
 
 ```sh
 pnpm sdk

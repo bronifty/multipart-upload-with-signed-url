@@ -1,5 +1,5 @@
 {
-  "name": "aws-serverless-toolbelt",
+  "name": "multipart-upload-with-signed-url",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
