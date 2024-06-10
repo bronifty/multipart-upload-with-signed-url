@@ -6,7 +6,9 @@
   "scripts": {
     "sdkv2": "tsx sdkv2MPU.ts",
     "sdkv3": "tsx sdkv3MPU.ts",
-    "sdkv3Signed": "tsx sdkv3MPUSignedURL.ts"
+    "sdkv3Signed": "tsx sdkv3MPUSignedURL.ts",
+    "dev": "tsx index.js --inspect",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "bronifty",
