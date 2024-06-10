@@ -1,34 +1,69 @@
-import { Upload } from "@aws-sdk/lib-storage";
-import { S3Client } from "@aws-sdk/client-s3";
+import {
+  S3Client,
+  CreateMultipartUploadCommand,
+  UploadPartCommand,
+  CompleteMultipartUploadCommand,
+  CompletedPart,
+} from "@aws-sdk/client-s3";
 import * as fs from "fs";
 import { MPUType } from "./types";
 
-async function mpu(config: MPUType) {
-  // Initialize S3Client
+async function multipartUploadExample(config: MPUType) {
   const s3Client = new S3Client({ region: "us-east-1" });
-  const { bucket, key, readable } = config;
+  const { bucket, key, filepath } = config;
+  const fileSize = fs.statSync(filepath).size;
+  const partSize = 5 * 1024 * 1024; // 5 MB
+  const fileStream = fs.createReadStream(filepath, { highWaterMark: partSize });
 
   try {
-    const parallelUploads3 = new Upload({
-      client: s3Client,
-      params: {
+    // Step 1: Start the multipart upload and get the upload ID
+    const createMultipartUploadCommand = new CreateMultipartUploadCommand({
+      Bucket: bucket,
+      Key: key,
+    });
+    const createMultipartUploadOutput = await s3Client.send(
+      createMultipartUploadCommand
+    );
+    const uploadId = createMultipartUploadOutput.UploadId;
+
+    // Step 2: Upload parts
+    let partNumber = 1;
+    const uploadedParts: CompletedPart[] = [];
+    for await (const partData of fileStream) {
+      const uploadPartCommand = new UploadPartCommand({
         Bucket: bucket,
         Key: key,
-        Body: readable,
+        PartNumber: partNumber,
+        UploadId: uploadId,
+        Body: partData,
+      });
+      const uploadPartOutput = await s3Client.send(uploadPartCommand);
+      uploadedParts.push({
+        PartNumber: partNumber,
+        ETag: uploadPartOutput.ETag,
+      });
+      partNumber++;
+    }
+
+    // Step 3: Complete the multipart upload
+    const completeMultipartUploadCommand = new CompleteMultipartUploadCommand({
+      Bucket: bucket,
+      Key: key,
+      UploadId: uploadId,
+      MultipartUpload: {
+        Parts: uploadedParts,
       },
-      queueSize: 4, // Adjust based on your concurrency needs
-      partSize: 1024 * 1024 * 5, // 5 MB
-      leavePartsOnError: false, // Set to true if you want to manually handle failed parts
     });
+    const completeMultipartUploadOutput = await s3Client.send(
+      completeMultipartUploadCommand
+    );
 
-    parallelUploads3.on("httpUploadProgress", (progress) => {
-      console.log(`Uploaded ${progress.loaded} out of ${progress.total} bytes`);
-    });
-
-    await parallelUploads3.done();
-    console.log("Upload completed successfully");
-  } catch (e) {
-    console.error("Upload failed:", e);
+    console.log(
+      "Upload completed successfully:",
+      completeMultipartUploadOutput
+    );
+  } catch (error) {
+    console.error("Upload failed:", error);
   }
 }
 
@@ -36,7 +71,7 @@ const config = {
   profile: "sst",
   bucket: "bronifty-sst",
   key: "Archive.zip",
-  filepath: "/Users/bro/Downloads/Archive01.zip",
-  readable: fs.createReadStream("/Users/bro/Downloads/Archive01.zip"),
+  filepath: "/Users/bronifty/Downloads/Archive.zip",
+  readable: fs.createReadStream("/Users/bronifty/Downloads/Archive.zip"),
 };
-mpu(config);
+multipartUploadExample(config);
