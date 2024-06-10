@@ -1,19 +1,19 @@
-The error you're encountering is related to the Cross-Origin Resource Sharing (CORS) policy, which is a security feature implemented by web browsers to restrict web pages from making requests to a different domain than the one that served the web page. This is particularly relevant when your client-side code (running on localhost) tries to make requests to AWS S3.
-Understanding the Error
-The error message indicates that the browser blocked the request because the S3 server did not include the appropriate Access-Control-Allow-Origin header in the response to the preflight request. Preflight requests are made (with the HTTP OPTIONS method) before the actual request to check if the CORS protocol is understood.
-Solutions
+here is the response client is getting from request to POST "/getPresignedUrl"
 
-1. Configure CORS on S3
-   To resolve this issue, you need to configure CORS on your S3 bucket to allow requests from your origin (http://localhost:3000 in this case). Here's how you can do this:
-1. Open the Amazon S3 Console: Go to your bucket's permissions tab.
-1. CORS Configuration: Find the CORS configuration section and edit it. You can add a rule like the following to allow requests from your local development environment:
-   > This configuration allows various HTTP methods and accepts requests from http://localhost:3000. Adjust the <AllowedOrigin> tag if your client is served from a different URL.
-1. Verify the Request Headers
-   Ensure that your client-side code does not send any custom headers that are not allowed by the CORS policy unless those headers are included in the AllowedHeader section of your S3 CORS configuration.
-1. Handling Preflight Requests
-   AWS S3 automatically handles OPTIONS preflight requests if the CORS configuration is set. Ensure that your CORS settings include the methods and headers used in your actual request.
-   Additional Notes
-   Testing Changes: After updating the CORS configuration in S3, it might take a few minutes to propagate. Clear your browser cache or try a hard refresh to ensure your changes are picked up.
-   Security Considerations: Be cautious with the CORS settings. Allowing \* (all origins) can expose your resources to unwanted access. It's best to specify only the origins that need access.
-   Development vs. Production: You might want to have different CORS settings for development and production environments. Manage this by using different buckets or adjusting the CORS rules based on the environment.
-   By configuring CORS correctly on your S3 bucket and ensuring your client-side requests are compliant with those settings, you should be able to resolve the CORS error and successfully make requests to AWS S3 from your local development environment.
+{
+"uploadId": "y6fiKNz8KH6DNG3xX0cEwqwn8j8iwi9dximaQ.K5eAq2IVV93wThOSr13JnQzsxkuwi3wZj95MSi1P9hO4GKGV.ogH8TNkCbANI3UvDE2_3oCupQG3uptkogJBdltDn7",
+"urls": [
+{
+"partNumber": 1,
+"url": "https://bronifty-sst.s3.us-east-1.amazonaws.com/Archive.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXYKJQSSILGVUL67Q%2F20240610%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240610T164222Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjELD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMiJHMEUCIQCtlL5ihV2dBxuTUA4wJvUr2%2BeXFR3deriuDIR5SLwwGgIgOBzBqG9zG71cRhCw85EMdDqaj%2FYVJH4Do%2BFUn8FvpQUq5AIIShAAGgw1MzMyNjY5OTQzMjAiDEn8VQhfd6aH5QxGDSrBAnxnRdgnx3QP1GhQEr28fnP4beMSKH0nY34zLa6h2x%2BL65dwTMZSFLgeIL8yImDmGJh%2Ftq8CkkA4K2ST4%2FqoqZxi8LjMyMiYaK2qiz8ilS%2BJxQRqjC1W5xqx8I9vJj3qRVBcTiKQynlwlDGVtUBZzdaLsOc1xpO4BpCCa31GkDZ%2BFfTooMjTQt0SHOk1iivk3KvMcs1pBywKQ%2FKBqNZhpuC7Dr%2BG8d8f83%2F6DuYgD4CJTdBAcGjEozFXKxssxRAKiDMY8Qx%2FAnhGG6U6H6BRig0BeLD0X1EpoQNYCaaD8dU6ejyBBOr96UxIcuDzy7DnpKhtbkIo2I8OePef2j03mz4BHqQuzSgxNoDoAQrifAtEcQTYm122Ku7kZKKKy8OS3XXubouUxoOKPL1cwCO%2F159aFvgq35oM9hVXuMr42bg84jC01JyzBjqnAQHz5CwpLRo1T7IdoB%2BQIlHdbYRxIFtFneN0UT8K2XE5d5ZpVyhkI3bM5cAVoLo0y27Dpe1fCKaZUzrGiwZDszXmb2sVXkNwuBqnc4KdTGuXHyHXsK7gBARsTLNhTdHBgroNtlpB0m911iKzm%2F5Acmkz61B6D9JsusveKlO44uQaR6tcv24rmy4V1QfukH0LKj4LGM4BAMXvK420b1W0yoQJkWU3Cv54&X-Amz-Signature=183443919c9421816d4170e17ed58a9e43a1f4178b0b0e3644e068b1419c5e45&X-Amz-SignedHeaders=host&partNumber=1&uploadId=y6fiKNz8KH6DNG3xX0cEwqwn8j8iwi9dximaQ.K5eAq2IVV93wThOSr13JnQzsxkuwi3wZj95MSi1P9hO4GKGV.ogH8TNkCbANI3UvDE2_3oCupQG3uptkogJBdltDn7&x-id=UploadPart"
+},
+{
+"partNumber": 2,
+"url": "https://bronifty-sst.s3.us-east-1.amazonaws.com/Archive.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXYKJQSSILGVUL67Q%2F20240610%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240610T164222Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjELD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMiJHMEUCIQCtlL5ihV2dBxuTUA4wJvUr2%2BeXFR3deriuDIR5SLwwGgIgOBzBqG9zG71cRhCw85EMdDqaj%2FYVJH4Do%2BFUn8FvpQUq5AIIShAAGgw1MzMyNjY5OTQzMjAiDEn8VQhfd6aH5QxGDSrBAnxnRdgnx3QP1GhQEr28fnP4beMSKH0nY34zLa6h2x%2BL65dwTMZSFLgeIL8yImDmGJh%2Ftq8CkkA4K2ST4%2FqoqZxi8LjMyMiYaK2qiz8ilS%2BJxQRqjC1W5xqx8I9vJj3qRVBcTiKQynlwlDGVtUBZzdaLsOc1xpO4BpCCa31GkDZ%2BFfTooMjTQt0SHOk1iivk3KvMcs1pBywKQ%2FKBqNZhpuC7Dr%2BG8d8f83%2F6DuYgD4CJTdBAcGjEozFXKxssxRAKiDMY8Qx%2FAnhGG6U6H6BRig0BeLD0X1EpoQNYCaaD8dU6ejyBBOr96UxIcuDzy7DnpKhtbkIo2I8OePef2j03mz4BHqQuzSgxNoDoAQrifAtEcQTYm122Ku7kZKKKy8OS3XXubouUxoOKPL1cwCO%2F159aFvgq35oM9hVXuMr42bg84jC01JyzBjqnAQHz5CwpLRo1T7IdoB%2BQIlHdbYRxIFtFneN0UT8K2XE5d5ZpVyhkI3bM5cAVoLo0y27Dpe1fCKaZUzrGiwZDszXmb2sVXkNwuBqnc4KdTGuXHyHXsK7gBARsTLNhTdHBgroNtlpB0m911iKzm%2F5Acmkz61B6D9JsusveKlO44uQaR6tcv24rmy4V1QfukH0LKj4LGM4BAMXvK420b1W0yoQJkWU3Cv54&X-Amz-Signature=67a7c74eeede601cf2c77afe797fd92bda1c29b580d3803a8c60ca7cf9227bb5&X-Amz-SignedHeaders=host&partNumber=2&uploadId=y6fiKNz8KH6DNG3xX0cEwqwn8j8iwi9dximaQ.K5eAq2IVV93wThOSr13JnQzsxkuwi3wZj95MSi1P9hO4GKGV.ogH8TNkCbANI3UvDE2_3oCupQG3uptkogJBdltDn7&x-id=UploadPart"
+},
+{
+"partNumber": 3,
+"url": "https://bronifty-sst.s3.us-east-1.amazonaws.com/Archive.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXYKJQSSILGVUL67Q%2F20240610%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240610T164222Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjELD%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMiJHMEUCIQCtlL5ihV2dBxuTUA4wJvUr2%2BeXFR3deriuDIR5SLwwGgIgOBzBqG9zG71cRhCw85EMdDqaj%2FYVJH4Do%2BFUn8FvpQUq5AIIShAAGgw1MzMyNjY5OTQzMjAiDEn8VQhfd6aH5QxGDSrBAnxnRdgnx3QP1GhQEr28fnP4beMSKH0nY34zLa6h2x%2BL65dwTMZSFLgeIL8yImDmGJh%2Ftq8CkkA4K2ST4%2FqoqZxi8LjMyMiYaK2qiz8ilS%2BJxQRqjC1W5xqx8I9vJj3qRVBcTiKQynlwlDGVtUBZzdaLsOc1xpO4BpCCa31GkDZ%2BFfTooMjTQt0SHOk1iivk3KvMcs1pBywKQ%2FKBqNZhpuC7Dr%2BG8d8f83%2F6DuYgD4CJTdBAcGjEozFXKxssxRAKiDMY8Qx%2FAnhGG6U6H6BRig0BeLD0X1EpoQNYCaaD8dU6ejyBBOr96UxIcuDzy7DnpKhtbkIo2I8OePef2j03mz4BHqQuzSgxNoDoAQrifAtEcQTYm122Ku7kZKKKy8OS3XXubouUxoOKPL1cwCO%2F159aFvgq35oM9hVXuMr42bg84jC01JyzBjqnAQHz5CwpLRo1T7IdoB%2BQIlHdbYRxIFtFneN0UT8K2XE5d5ZpVyhkI3bM5cAVoLo0y27Dpe1fCKaZUzrGiwZDszXmb2sVXkNwuBqnc4KdTGuXHyHXsK7gBARsTLNhTdHBgroNtlpB0m911iKzm%2F5Acmkz61B6D9JsusveKlO44uQaR6tcv24rmy4V1QfukH0LKj4LGM4BAMXvK420b1W0yoQJkWU3Cv54&X-Amz-Signature=bb106699561c263fa247fc4865d414c5ee991b0b0bf9f9c38c8769f562e4e833&X-Amz-SignedHeaders=host&partNumber=3&uploadId=y6fiKNz8KH6DNG3xX0cEwqwn8j8iwi9dximaQ.K5eAq2IVV93wThOSr13JnQzsxkuwi3wZj95MSi1P9hO4GKGV.ogH8TNkCbANI3UvDE2_3oCupQG3uptkogJBdltDn7&x-id=UploadPart"
+}
+]
+}
