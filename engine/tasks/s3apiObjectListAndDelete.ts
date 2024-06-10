@@ -55,7 +55,7 @@ async function main() {
   };
   try {
     await listAndAbortMPU(config);
-    console.log("All listed multipart uploads have been aborted.");
+    console.log("All files have been deleted.");
   } catch (error) {
     console.error("Error in main function: ", error);
   }
