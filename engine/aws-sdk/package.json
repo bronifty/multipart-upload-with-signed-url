@@ -16,7 +16,8 @@
     "@aws-sdk/lib-storage": "^3.592.0",
     "@aws-sdk/s3-request-presigner": "^3.592.0",
     "aws-sdk": "^2.1637.0",
-    "axios": "^1.7.2"
+    "axios": "^1.7.2",
+    "express": "^4.19.2"
   },
   "devDependencies": {
     "@types/node": "^20.14.2",
