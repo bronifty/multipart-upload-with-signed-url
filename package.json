@@ -6,7 +6,9 @@
   "scripts": {
     "engine-install": "pnpm --prefix ./engine install",
     "aws-sdk-install": "pnpm --prefix ./aws-sdk install",
-    "aws-sdk-start": "pnpm --prefix ./aws-sdk start"
+    "aws-sdk-start": "pnpm --prefix ./aws-sdk start",
+    "sdk": "pnpm aws-sdk-install && pnpm aws-sdk-start",
+    "clean": "rm -rf node_modules **/node_modules"
   },
   "keywords": [],
   "author": "bronifty",

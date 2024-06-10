@@ -1,5 +1,18 @@
 # AWS Serverless Toolbelt
 
+### Multipart Upload with Signed URLs from the Browser hitting a nodejs server backend
+
+```sh
+pnpm sdk
+```
+
+- navigate to http://localhost:3000
+- choose file and upload (watch the console; we're gonna get feedback on the ui soon)
+- it will upload any size file up to 5TB from the browser in chunks of 5MB apiece by making 3 different types of requests:
+  1. POST to request signed url endpoint which will start the mpu to get an upload id, which it will use in subsequent requests (each upload part and the complete or abort call requires upload id); the POST will return the url and part number for the chunks of the file
+  2. PUT to each url returned by the previous request with the file chunk and part number
+  3. POST to complete the mpu once all parts have been uploaded
+
 [aws-sdk-js-v3](https://github.com/aws/aws-sdk-js-v3/tree/main)
 
 - Update: sdkv3 Multipart Upload with Signed URLs working from browser [here](engine/aws-sdk/public/index.html)
