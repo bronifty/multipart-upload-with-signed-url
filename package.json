@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "engine-install": "pnpm --prefix ./engine install"
+    "engine-install": "pnpm --prefix ./engine install",
+    "aws-sdk-install": "pnpm --prefix ./aws-sdk install",
+    "aws-sdk-start": "pnpm --prefix ./aws-sdk start"
   },
   "keywords": [],
   "author": "bronifty",
