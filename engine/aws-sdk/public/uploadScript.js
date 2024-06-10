@@ -1,4 +1,5 @@
 export async function uploadFile() {
+  console.log("uploadFile() called");
   const fileInput = document.getElementById("fileInput");
   const file = fileInput.files[0];
   const partSize = 5 * 1024 * 1024; // 5 MB per part
