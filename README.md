@@ -4,6 +4,8 @@
 - also sdkv3 mpu upload (parallel) on server working
 - notably, the s3 bucket needed cors settings to allow all origins (this needs to be protected by a login first tho; we'll have to do that soon) and also expose the ETag header
 
+[cors-config-set.sh](scripts/s3/cors-config-set.sh)
+
 ```json
 {
   "CORSRules": [
