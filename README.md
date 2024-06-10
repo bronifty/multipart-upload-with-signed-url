@@ -65,3 +65,7 @@ The cli part of this toolbox is in the Makefile and scripts (not all scripts are
 The purpose of the cli is to get things set up with deployments in the most straightforward manner possible using discrete logical steps. These can be composed together, but the purpose is to keep things as simple and as direct as possible. That's why it's here.
 
 The sdkv3 will be the main tool for interacting with the services, but getting them stood up will rely on the cli most likely unless the sdk can do that too. Ultimately, tho, I want to integrate this into cdk and winglang eventually as libraries.
+
+### Monorepo
+
+I wanted to make this a monorepo but i kept getting stuck on how the node_modules folder is hoisted or not into each package and app. I may not want to install every separate package and app's deps globally, so I think putting a package.json in the root with some scripts that can use --prefix is good enough. I don't need to make it a proper monorepo that does the weird caching and hoisting thing. I may change my opinion, but for now, that is the simplest and most straightforward approach I can think of when i want to rapidly fire off these requests and capture these responses and get fast feedback in my development.
