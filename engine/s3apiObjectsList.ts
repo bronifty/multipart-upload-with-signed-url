@@ -5,26 +5,25 @@ const execAsync = util.promisify(exec);
 
 /**
  * Generic function to get AWS resource ARN by name.
- * @param {string} profileName - Name of the profile.
- * @param {string} bucketName - Name of the bucket.
+ * @param {string} profile - Name of the profile.
+ * @param {string} bucket - Name of the bucket.
  * @returns {Promise<string>} - A promise that resolves to the ARN of the resource.
  */
 
-export async function listObjects(
-  profileName: string = "default",
-  bucketName: string
-) {
-  //   let command;
+export async function listObjects(profile: string = "default", bucket: string) {
+  // const { profile = "default", bucket, key, uploadId } = config;
+
   // Execute the command and extract the stdout, then trim any extra whitespace
   const regionResult = await execAsync(
-    "aws configure get region --output text"
+    `aws configure --profile ${profile} get region --output text`
   );
   const REGION = regionResult.stdout.trim();
   const accountIdResult = await execAsync(
-    "aws sts get-caller-identity --query Account --output text"
+    `aws sts --profile ${profile} get-caller-identity  --query Account --output text`
   );
   const ACCOUNT_ID = accountIdResult.stdout.trim();
-  const command = `aws s3api list-objects --profile ${profileName} --bucket ${bucketName} --query 'Contents[].{Key: Key, Size: Size}'`;
+
+  const command = `aws s3api list-objects --profile ${profile} --bucket ${bucket} --query 'Contents[].{Key: Key, Size: Size}'`;
 
   try {
     const { stdout, stderr } = await execAsync(command);
