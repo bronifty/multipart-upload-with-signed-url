@@ -31,6 +31,11 @@
 ### Note:
 
 - my workflow is to copy and paste the aws credentials in the cmd line so that the aws sdk client is respected by the server
+
+```sh
+pnpm --prefix ./aws-sdk install && pnpm --prefix ./aws-sdk start
+```
+
 - next steps will include moving the server to a lambda (and cloudfront proxy?)
 
 ### TODO
