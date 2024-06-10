@@ -29,6 +29,7 @@ export async function uploadFile() {
   }
 
   const { uploadId, urls } = await presignedUrlResponse.json();
+  const parts = [];
 
   // Upload each part using the presigned URLs
   for (let i = 0; i < totalParts; i++) {
@@ -39,6 +40,9 @@ export async function uploadFile() {
     const uploadResponse = await fetch(urls[i].url, {
       method: "PUT",
       body: blob,
+      headers: {
+        "Content-Type": "application/octet-stream",
+      },
     });
 
     if (!uploadResponse.ok) {
@@ -49,6 +53,10 @@ export async function uploadFile() {
           (await uploadResponse.text())
       );
     }
+
+    // collect ETag from response header
+    const etag = uploadResponse.headers.get("ETag");
+    parts.push({ ETag: etag, PartNumber: i + 1 });
   }
 
   // Notify the server that all parts are uploaded
@@ -58,9 +66,10 @@ export async function uploadFile() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      bucket: bucket,
-      key: key,
-      uploadId: uploadId,
+      bucket,
+      key,
+      uploadId,
+      parts,
     }),
   });
 

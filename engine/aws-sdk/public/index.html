@@ -5,8 +5,8 @@
     <title>Multipart Upload</title>
   </head>
   <body>
-    <!-- <script type="module" src="./uploadScript.js"></script> -->
-    <script>
+    <script type="module" src="./uploadScript.js"></script>
+    <!-- <script>
       async function uploadFile() {
         const fileInput = document.getElementById("fileInput");
         const file = fileInput.files[0];
@@ -76,8 +76,8 @@
 
         alert("File uploaded successfully!");
       }
-    </script>
-    <script>
+    </script> -->
+    <!-- <script>
       async function test() {
         const response = await fetch("http://localhost:3000/getPresignedUrl", {
           method: "POST",
@@ -93,9 +93,9 @@
         const data = await response.json();
         console.log(data);
       }
-    </script>
+    </script> -->
     <input type="file" id="fileInput" />
     <button onclick="uploadFile()">Upload</button>
-    <button onclick="test()">Test</button>
+    <!-- <button onclick="test()">Test</button> -->
   </body>
 </html>
