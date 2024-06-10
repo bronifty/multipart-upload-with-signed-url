@@ -6,7 +6,7 @@ import { MPUType } from "./types";
 async function mpu(config: MPUType) {
   // Initialize S3Client
   const s3Client = new S3Client({ region: "us-east-1" });
-  const { bucket, key, file } = config;
+  const { bucket, key, readable } = config;
 
   try {
     const parallelUploads3 = new Upload({
@@ -14,7 +14,7 @@ async function mpu(config: MPUType) {
       params: {
         Bucket: bucket,
         Key: key,
-        Body: file,
+        Body: readable,
       },
       queueSize: 4, // Adjust based on your concurrency needs
       partSize: 1024 * 1024 * 5, // 5 MB
@@ -36,6 +36,7 @@ const config = {
   profile: "sst",
   bucket: "bronifty-sst",
   key: "Archive.zip",
-  file: fs.createReadStream("/Users/bro/Downloads/Archive01.zip"),
+  filepath: "/Users/bro/Downloads/Archive01.zip",
+  readable: fs.createReadStream("/Users/bro/Downloads/Archive01.zip"),
 };
 mpu(config);
