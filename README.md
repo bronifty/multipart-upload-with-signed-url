@@ -28,6 +28,11 @@
   - delete from bucket
   - add login flow
 
+### Note:
+
+- my workflow is to copy and paste the aws credentials in the cmd line so that the aws sdk client is respected by the server
+- next steps will include moving the server to a lambda (and cloudfront proxy?)
+
 ### TODO
 
 - [cloudfront-hosting-toolkit](https://blog.awsfundamentals.com/cloudfront-hosting-toolkit?utm_source=pocket_shared)
