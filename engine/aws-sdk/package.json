@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "upload": "tsx index.ts"
+    "upload": "tsx index.ts",
+    "sdkv3": "tsx sdkv3MPU.ts"
   },
   "keywords": [],
   "author": "bronifty",

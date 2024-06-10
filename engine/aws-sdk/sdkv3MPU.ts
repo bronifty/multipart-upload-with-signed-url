@@ -3,22 +3,18 @@ import { S3Client } from "@aws-sdk/client-s3";
 import * as fs from "fs";
 import { MPUType } from "./types";
 
-async function upload(config: MPUType) {
+async function mpu(config: MPUType) {
   // Initialize S3Client
   const s3Client = new S3Client({ region: "us-east-1" });
-
-  // Define the parameters for the upload
-  const bucketName = "bronifty-sst";
-  const keyName = "Archive.zip";
-  const fileBody = fs.createReadStream("/Users/bro/Downloads/Archive01.zip"); // Node.js file stream
+  const { bucket, key, file } = config;
 
   try {
     const parallelUploads3 = new Upload({
       client: s3Client,
       params: {
-        Bucket: bucketName,
-        Key: keyName,
-        Body: fileBody,
+        Bucket: bucket,
+        Key: key,
+        Body: file,
       },
       queueSize: 4, // Adjust based on your concurrency needs
       partSize: 1024 * 1024 * 5, // 5 MB
@@ -35,3 +31,11 @@ async function upload(config: MPUType) {
     console.error("Upload failed:", e);
   }
 }
+
+const config = {
+  profile: "sst",
+  bucket: "bronifty-sst",
+  key: "Archive.zip",
+  file: fs.createReadStream("/Users/bro/Downloads/Archive01.zip"),
+};
+mpu(config);
