@@ -1,6 +1,6 @@
 # AWS Serverless Toolbelt
 
-- Update: sdkv3 Multipart Upload with Signed URLs working from browser
+- Update: sdkv3 Multipart Upload with Signed URLs working from browser [here](aws-cli-wrapper/engine/aws-sdk/public/index.html)
 - also sdkv3 mpu upload (parallel) on server working
 - notably, the s3 bucket needed cors settings to allow all origins (this needs to be protected by a login first tho; we'll have to do that soon) and also expose the ETag header
 
