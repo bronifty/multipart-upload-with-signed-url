@@ -75,3 +75,7 @@ export async function uploadFile() {
 
   alert("File uploaded successfully!");
 }
+
+export async function hello() {
+  console.log("hello");
+}
