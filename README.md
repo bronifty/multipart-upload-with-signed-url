@@ -17,6 +17,13 @@
 }
 ```
 
+- next steps on the mpu will be to:
+  - show progress bar of upload on page
+  - list uploads in bucket
+  - download from bucket
+  - delete from bucket
+  - add login flow
+
 ## Design Decisions Document
 
 I'm at a fork in the road because I got express working in lambda integrated with apigatewayv2 http with a catchall route, but only the root route ("/") works not any others. Rather than attempting to t-shoot that, which could suck up several days or more and involve fiddling with express, which I won't standardize on anyway, I choose to learn fastify and standardize on that. Along the way, I can use their tools for integration with api gateway and lambda, which is in the book on kindle here [accelerating server side development with fastify](https://read.amazon.com/?asin=B0B2PR8RQY&ref_=kwl_kr_iv_rec_16).
