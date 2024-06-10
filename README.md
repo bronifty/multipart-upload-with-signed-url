@@ -1,5 +1,7 @@
 # AWS Serverless Toolbelt
 
+---
+
 ### Multipart Upload with Signed URLs from the Browser hitting a nodejs server backend
 
 ```sh
@@ -15,8 +17,6 @@ pnpm sdk
 
 [aws-sdk-js-v3](https://github.com/aws/aws-sdk-js-v3/tree/main)
 
-- Update: sdkv3 Multipart Upload with Signed URLs working from browser [here](engine/aws-sdk/public/index.html)
-- also sdkv3 mpu upload (parallel) on server working
 - notably, the s3 bucket needed cors settings to allow all origins (this needs to be protected by a login first tho; we'll have to do that soon) and also expose the ETag header
 
 [cors-config-set.sh](scripts/s3/cors-config-set.sh)
@@ -34,24 +34,22 @@ pnpm sdk
 }
 ```
 
-- next steps on the mpu will be to:
-  - show progress bar of upload on page
-  - list uploads in bucket
-  - download from bucket
-  - delete from bucket
-  - add login flow
+#### TODO
 
-### Note:
+UI:
 
-- my workflow is to copy and paste the aws credentials in the cmd line so that the aws sdk client is respected by the server
+- progress bar
+- crud
+- auth
 
-```sh
-pnpm --prefix ./aws-sdk install && pnpm --prefix ./aws-sdk start
-```
+SERVER:
 
-- next steps will include moving the server to a lambda (and cloudfront proxy?)
+- lambdaify the server (and ultimately, use fastify not express)
+- add a cloudfront proxy for the site and api
 
-### TODO
+---
+
+### Links
 
 - [cloudfront-hosting-toolkit](https://blog.awsfundamentals.com/cloudfront-hosting-toolkit?utm_source=pocket_shared)
 - [aws-sdkv3-js-notes-app](https://github.com/aws-samples/aws-sdk-js-notes-app)
