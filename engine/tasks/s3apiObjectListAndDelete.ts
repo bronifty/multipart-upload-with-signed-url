@@ -1,0 +1,81 @@
+import { exec } from "child_process";
+import util from "util";
+import { MPUType } from "../types";
+
+const execAsync = util.promisify(exec);
+
+// type MPUListResponse = {
+//   Uploads: [
+//     {
+//       UploadId: string;
+//       Key: string;
+//       Initiated: string;
+//       StorageClass: string;
+//       Owner: {
+//         ID: string;
+//       };
+//       Initiator: {
+//         ID: string;
+//       };
+//     }
+//   ];
+//   RequestCharged: null;
+// };
+
+type FileListResponse = [
+  {
+    Key: string;
+    Size: number;
+  }
+];
+
+/**
+ * Lists all multipart uploads and aborts each one.
+ * @param {MPUType} config - Configuration object containing profile and bucket.
+ */
+async function listAndAbortMPU(config: MPUType): Promise<void> {
+  const { profile = "default", bucket, key, uploadId } = config;
+
+  // List files in bucket
+  const listCommand = `aws s3api list-objects --profile ${profile} --bucket ${bucket} --query 'Contents[].{Key: Key, Size: Size}'`;
+
+  try {
+    const listResult = await execAsync(listCommand);
+    const listResponse: FileListResponse = JSON.parse(listResult.stdout);
+    if (!listResponse) {
+      console.log("No files to delete.");
+      return;
+    }
+
+    // Delete each file
+    for (const file of listResponse) {
+      const deleteCommand = `aws s3api delete-object --profile ${profile} --bucket ${bucket} --key ${file.Key}`;
+      try {
+        await execAsync(deleteCommand);
+        console.log(`Deleted file: ${file.Key}`);
+      } catch (deleteError) {
+        console.error(`Error deleting file ${file.Key}: ${deleteError}`);
+      }
+    }
+  } catch (listError) {
+    console.error(`Error listing files: ${listError}`);
+    throw listError;
+  }
+}
+
+// Example usage:
+async function main() {
+  const config: MPUType = {
+    profile: "sst",
+    bucket: "bronifty-sst",
+    key: "",
+    uploadId: "",
+  };
+  try {
+    await listAndAbortMPU(config);
+    console.log("All listed multipart uploads have been aborted.");
+  } catch (error) {
+    console.error("Error in main function: ", error);
+  }
+}
+main();

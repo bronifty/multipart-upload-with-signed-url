@@ -20,7 +20,8 @@
     "s3apiObjectGet": "tsx s3apiObjectGet.ts",
     "s3apiObjectsList": "tsx s3apiObjectsList.ts",
     "start": "pnpm compile && node dist/getResourceArn.js",
-    "tasks:s3apiMPUListAndAbort": "tsx ./tasks/s3apiMPUListAndAbort.ts"
+    "tasks:s3apiMPUListAndAbort": "tsx ./tasks/s3apiMPUListAndAbort.ts",
+    "tasks:s3apiObjectListAndDelete": "tsx ./tasks/s3apiObjectListAndDelete.ts"
   },
   "keywords": [],
   "author": "",
