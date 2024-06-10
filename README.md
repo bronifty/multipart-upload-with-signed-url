@@ -8,7 +8,7 @@ pnpm sdk
 - choose file and upload (watch the console; we're gonna get feedback on the ui soon)
 - it will upload any size file up to 5TB from the browser in chunks of 5MB apiece by making 3 different types of requests:
   1. POST /getPresignedUrl will start the mpu to get an upload id, which it will use in subsequent requests (each upload part and the complete or abort call requires upload id); the POST will return the url and part number for the chunks of the file
-  2. PUT `/https://${BUCKET}.s3.${REGION}.amazonaws.com/${KEY}?${SIGNED_HASH}=UploadPart` to each url returned by the previous request with the upload id and part number in the header with the byte range buffer as payload
+  2. PUT `https://${BUCKET}.s3.${REGION}.amazonaws.com/${KEY}?${SIGNED_HASH}=UploadPart` to each url returned by the previous request with the upload id and part number in the header with the byte range buffer as payload
   3. POST /completeMultipartUpload once all parts have been uploaded
 
 [aws-sdk-js-v3](https://github.com/aws/aws-sdk-js-v3/tree/main)
