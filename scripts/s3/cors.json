@@ -2,7 +2,7 @@
   "CORSRules": [
     {
       "AllowedOrigins": ["*"],
-      "AllowedMethods": ["GET", "PUT", "PATCH", "POST", "DELETE"],
+      "AllowedMethods": ["GET", "PUT", "POST", "DELETE"],
       "AllowedHeaders": ["*"]
     }
   ]
