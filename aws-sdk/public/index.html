@@ -13,7 +13,7 @@
         line-height: 100px;
         color: #ccc;
         margin: 20px;
-        cursor: pointer; /* Indicates the drop zone is clickable */
+        cursor: pointer;
       }
       #dropZone.hover {
         background-color: #f0f0f0;
@@ -28,10 +28,17 @@
         grid-template-columns: 1fr 1fr;
         gap: 10px;
       }
+      .grid-cell {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+      }
     </style>
   </head>
   <body>
-    <script type="module" src="uploadScript.js"></script>
     <div id="dropZone">Drag and drop your file here or click to select</div>
     <span id="fileName"></span>
     <input type="file" id="fileInput" style="display: none" />
@@ -39,31 +46,17 @@
     <button id="uploadButton">Upload</button>
     <button id="listObjectsButton">List Objects</button>
     <div id="objectGrid"></div>
+
     <script type="module">
       import { hello, uploadFile, listObjects } from "./uploadScript.js";
 
       const dropZone = document.getElementById("dropZone");
       const fileInput = document.getElementById("fileInput");
       const fileNameDisplay = document.getElementById("fileName");
+      const uploadButton = document.getElementById("uploadButton");
       const listObjectsButton = document.getElementById("listObjectsButton");
       const objectGrid = document.getElementById("objectGrid");
-
-      async function updateObjectGrid() {
-        const objects = await listObjectsFromServer(bucket);
-        const objectGrid = document.getElementById("objectGrid");
-        objectGrid.innerHTML = objects
-          .map(
-            (obj) => `
-        <div class="grid-cell">
-          ${obj.Key}
-          <button onclick="location.href='https://s3.your-region.amazonaws.com/${bucket}/${encodeURIComponent(
-              obj.Key
-            )}'">Download</button>
-        </div>
-      `
-          )
-          .join("");
-      }
+      const bucketInput = document.getElementById("bucketInput");
 
       dropZone.addEventListener("click", () => {
         fileInput.click();
@@ -97,23 +90,46 @@
         }
       });
 
-      document
-        .querySelector("#uploadButton")
-        .addEventListener("click", async () => {
-          hello();
-          const bucket = document.getElementById("bucketInput").value;
-          await uploadFile(bucket);
-          await updateObjectGrid(bucket);
-        });
+      uploadButton.addEventListener("click", async () => {
+        hello();
+        const bucket = bucketInput.value;
+        await uploadFile(bucket);
+      });
 
-      listObjectsButton.addEventListener("click", () => {
-        const bucket = document.getElementById("bucketInput").value;
-        listObjects(bucket);
+      listObjectsButton.addEventListener("click", async () => {
+        const bucket = bucketInput.value;
+        const objects = await listObjects(bucket);
+        objectGrid.innerHTML = objects
+          .map(
+            (obj) => `
+        <div class="grid-cell">
+          <strong>File:</strong> ${obj.Key}
+          <strong>Size:</strong> ${formatBytes(obj.Size)}
+          <strong>Last Modified:</strong> ${new Date(
+            obj.LastModified
+          ).toLocaleDateString()} ${new Date(
+              obj.LastModified
+            ).toLocaleTimeString()}
+          <strong>Owner:</strong> ${obj.Owner.DisplayName}
+          <button onclick="location.href='https://s3.your-region.amazonaws.com/${bucket}/${encodeURIComponent(
+              obj.Key
+            )}'">Download</button>
+        </div>
+      `
+          )
+          .join("");
       });
-      objectGrid.addEventListener("click", () => {
-        const bucket = document.getElementById("bucketInput").value;
-        listObjects(bucket);
-      });
+
+      function formatBytes(bytes, decimals = 2) {
+        if (bytes === 0) return "0 Bytes";
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return (
+          parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i]
+        );
+      }
     </script>
   </body>
 </html>
