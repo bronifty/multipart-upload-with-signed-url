@@ -23,6 +23,11 @@
         margin-top: 10px;
         color: #666;
       }
+      #objectGrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
     </style>
   </head>
   <body>
@@ -32,12 +37,33 @@
     <input type="file" id="fileInput" style="display: none" />
     <input type="text" id="bucketInput" placeholder="Enter bucket name" />
     <button id="uploadButton">Upload</button>
+    <button id="listObjectsButton">List Objects</button>
+    <div id="objectGrid"></div>
     <script type="module">
-      import { hello, uploadFile } from "./uploadScript.js";
+      import { hello, uploadFile, listObjects } from "./uploadScript.js";
 
       const dropZone = document.getElementById("dropZone");
       const fileInput = document.getElementById("fileInput");
       const fileNameDisplay = document.getElementById("fileName");
+      const listObjectsButton = document.getElementById("listObjectsButton");
+      const objectGrid = document.getElementById("objectGrid");
+
+      async function updateObjectGrid() {
+        const objects = await listObjectsFromServer(bucket);
+        const objectGrid = document.getElementById("objectGrid");
+        objectGrid.innerHTML = objects
+          .map(
+            (obj) => `
+        <div class="grid-cell">
+          ${obj.Key}
+          <button onclick="location.href='https://s3.your-region.amazonaws.com/${bucket}/${encodeURIComponent(
+              obj.Key
+            )}'">Download</button>
+        </div>
+      `
+          )
+          .join("");
+      }
 
       dropZone.addEventListener("click", () => {
         fileInput.click();
@@ -71,10 +97,22 @@
         }
       });
 
-      document.querySelector("#uploadButton").addEventListener("click", () => {
-        hello();
+      document
+        .querySelector("#uploadButton")
+        .addEventListener("click", async () => {
+          hello();
+          const bucket = document.getElementById("bucketInput").value;
+          await uploadFile(bucket);
+          await updateObjectGrid(bucket);
+        });
+
+      listObjectsButton.addEventListener("click", () => {
         const bucket = document.getElementById("bucketInput").value;
-        uploadFile(bucket);
+        listObjects(bucket);
+      });
+      objectGrid.addEventListener("click", () => {
+        const bucket = document.getElementById("bucketInput").value;
+        listObjects(bucket);
       });
     </script>
   </body>

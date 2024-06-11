@@ -6,6 +6,7 @@ const {
   UploadPartCommand,
   CompleteMultipartUploadCommand,
   CompletedPart,
+  ListObjectsCommand,
 } = s3Package;
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
@@ -83,6 +84,21 @@ app.post("/completeUpload", async (req, res) => {
   } catch (error) {
     console.error("Error completing multipart upload:", error);
     res.status(500).send("Failed to complete multipart upload");
+  }
+});
+
+app.get("/listObjects", async (req, res) => {
+  const { bucket } = req.query;
+  console.log("bucket", bucket);
+
+  try {
+    const data = await s3Client.send(
+      new ListObjectsCommand({ Bucket: bucket })
+    );
+    res.json(data.Contents);
+  } catch (error) {
+    console.error("Error listing objects:", error);
+    res.status(500).send("Failed to list objects");
   }
 });
 

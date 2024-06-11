@@ -79,3 +79,18 @@ export async function uploadFile(bucket) {
 export async function hello() {
   console.log("hello");
 }
+
+export async function listObjects(bucket) {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/listObjects?bucket=${encodeURIComponent(bucket)}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch objects: " + (await response.text()));
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching objects from server:", error);
+    return [];
+  }
+}
