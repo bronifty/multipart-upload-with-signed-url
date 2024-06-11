@@ -7,6 +7,7 @@ const {
   CompleteMultipartUploadCommand,
   CompletedPart,
   ListObjectsCommand,
+  GetObjectCommand,
 } = s3Package;
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
@@ -99,6 +100,23 @@ app.get("/listObjects", async (req, res) => {
   } catch (error) {
     console.error("Error listing objects:", error);
     res.status(500).send("Failed to list objects");
+  }
+});
+
+app.get("/downloadObject", async (req, res) => {
+  const { bucket, key } = req.query;
+
+  try {
+    const getObjectParams = {
+      Bucket: bucket,
+      Key: key,
+    };
+    const { Body } = await s3Client.send(new GetObjectCommand(getObjectParams));
+    res.attachment(key); // Sets the header to prompt downloads with the original file name.
+    Body.pipe(res); // Streams the S3 object directly to the client.
+  } catch (error) {
+    console.error("Error downloading object:", error);
+    res.status(500).send("Failed to download object");
   }
 });
 
