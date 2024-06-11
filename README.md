@@ -7,6 +7,7 @@ pnpm sdk
 - make sure your aws creds are configured and your server knows how to connect to it (eg by pasting your creds in the terminal, using aws sso login, or using keys)
 - navigate to http://localhost:3000 and input the bucket name
 - then either list your current files or upload a new one
+  - note: download buttons don't work this is an issue with the html setup; gonna switch to react so there's a better story around manipulating the dom and dynamic objects
 - choose file and upload (watch the console; we're gonna get feedback on the ui soon)
 - it will upload any size file up to 5TB from the browser in chunks of 5MB apiece by making 3 different types of requests:
   1. POST /getPresignedUrl will start the mpu to get an upload id, which it will use in subsequent requests (each upload part and the complete or abort call requires upload id); the POST will return the url and part number for the chunks of the file
