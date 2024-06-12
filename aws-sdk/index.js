@@ -6,6 +6,7 @@ const {
   UploadPartCommand,
   CompleteMultipartUploadCommand,
   CompletedPart,
+  ListBucketsCommand,
   ListObjectsCommand,
   GetObjectCommand,
 } = s3Package;
@@ -21,6 +22,17 @@ const s3Client = new S3Client({ region: "us-east-1" });
 app.use(express.static("public"));
 
 app.use(express.json());
+
+app.get("/listBuckets", async (req, res) => {
+  try {
+    const command = new ListBucketsCommand({});
+    const data = await s3Client.send(command);
+    res.json(data.Buckets);
+  } catch (error) {
+    console.error("Error listing buckets:", error);
+    res.status(500).send("Failed to list buckets");
+  }
+});
 
 // Endpoint to initiate multipart upload and get presigned URLs for each part
 app.post("/getPresignedUrl", async (req, res) => {

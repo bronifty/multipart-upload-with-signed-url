@@ -36,9 +36,27 @@
         flex-direction: column;
         align-items: start;
       }
+      #bucketGrid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .bucket-cell {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+      }
     </style>
   </head>
   <body>
+    <div
+      id="bucketGrid"
+      style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px"
+    ></div>
     <div id="dropZone">Drag and drop your file here or click to select</div>
     <span id="fileName"></span>
     <input type="file" id="fileInput" style="display: none" />
@@ -48,7 +66,7 @@
     <div id="objectGrid"></div>
 
     <script type="module">
-      import { hello, uploadFile, listObjects } from "./uploadScript.js";
+      import { hello, uploadFile, listObjects, listBuckets } from "./script.js";
 
       const dropZone = document.getElementById("dropZone");
       const fileInput = document.getElementById("fileInput");
@@ -94,6 +112,23 @@
         hello();
         const bucket = bucketInput.value;
         await uploadFile(bucket);
+      });
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        const buckets = await listBuckets();
+        const bucketGrid = document.getElementById("bucketGrid");
+        bucketGrid.innerHTML = buckets
+          .map(
+            (bucket) => `
+      <div class="bucket-cell">
+        <strong>Bucket Name:</strong> ${bucket.Name}
+        <strong>Creation Date:</strong> ${new Date(
+          bucket.CreationDate
+        ).toLocaleDateString()}
+      </div>
+    `
+          )
+          .join("");
       });
 
       // listObjectsButton.addEventListener("click", async () => {

@@ -94,3 +94,14 @@ export async function listObjects(bucket) {
     return [];
   }
 }
+
+export async function listBuckets() {
+  try {
+    const response = await fetch("http://localhost:3000/listBuckets");
+    const buckets = await response.json();
+    console.log(buckets);
+    return buckets;
+  } catch (error) {
+    console.error("Failed to load buckets:", error);
+  }
+}
