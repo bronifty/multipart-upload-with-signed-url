@@ -1,33 +1,3 @@
-export async function hello() {
-  console.log("hello");
-}
-
-export async function listBuckets() {
-  try {
-    const response = await fetch("http://localhost:3000/listBuckets");
-    const buckets = await response.json();
-    console.log(buckets);
-    return buckets;
-  } catch (error) {
-    console.error("Failed to load buckets:", error);
-  }
-}
-
-export async function listObjects(bucket) {
-  try {
-    const response = await fetch(
-      `http://localhost:3000/listObjects?bucket=${encodeURIComponent(bucket)}`
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch objects: " + (await response.text()));
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching objects from server:", error);
-    return [];
-  }
-}
-
 export async function getPresignedUrls(bucket, key, totalParts) {
   const response = await fetch("http://localhost:3000/getPresignedUrl", {
     method: "POST",
@@ -87,7 +57,6 @@ export async function uploadFile(bucket) {
   const partSize = 5 * 1024 * 1024;
   const totalParts = Math.ceil(file.size / partSize);
   const uploadStatus = document.getElementById("uploadStatus");
-  uploadStatus.textContent = `Uploading file ${key} to bucket ${bucket}...`;
 
   const { uploadId, urls } = await getPresignedUrls(bucket, key, totalParts);
   const parts = [];
