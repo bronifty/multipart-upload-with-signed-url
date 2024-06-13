@@ -133,29 +133,6 @@
           .join("");
       });
 
-      // listObjectsButton.addEventListener("click", async () => {
-      //   const bucket = bucketInput.value;
-      //   const objects = await listObjects(bucket);
-      //   objectGrid.innerHTML = objects
-      //     .map(
-      //       (obj) => `
-      //   <div class="grid-cell">
-      //     <strong>File:</strong> ${obj.Key}
-      //     <strong>Size:</strong> ${formatBytes(obj.Size)}
-      //     <strong>Last Modified:</strong> ${new Date(
-      //       obj.LastModified
-      //     ).toLocaleDateString()} ${new Date(
-      //         obj.LastModified
-      //       ).toLocaleTimeString()}
-      //     <strong>Owner:</strong> ${obj.Owner.DisplayName}
-      //     <button onclick="location.href='https://s3.us-east-1.amazonaws.com/${bucket}/${encodeURIComponent(
-      //         obj.Key
-      //       )}'">Download</button>
-      //   </div>
-      // `
-      //     )
-      //     .join("");
-      // });
       function downloadObject(bucket, key) {
         window.location.href = `http://localhost:3000/downloadObject?bucket=${encodeURIComponent(
           bucket
