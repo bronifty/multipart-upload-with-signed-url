@@ -8,15 +8,15 @@ for bucket in $buckets; do
     echo "Checking bucket: $bucket"
 
     # List all objects in the bucket
-    objects=$(aws s3api list-objects --query 'Contents[].{Key: Key}' --output text)
+    objects=$(aws s3api list-objects --bucket $bucket --query 'Contents[].{Key: Key}' --output text)
 
     # Check if the bucket is not empty
     if [ -n "$objects" ]; then
         echo "Deleting objects in bucket: $bucket"
 
         # Delete all objects in the bucket
-        while read -r key version; do
-            aws s3api delete-object --bucket "$bucket" --key "$key" --version-id "$version"
+        while read -r key; do
+            aws s3api delete-object --bucket "$bucket" --key "$key"
         done <<< "$objects"
 
         echo "Objects deleted in bucket: $bucket"
