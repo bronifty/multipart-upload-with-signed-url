@@ -25,44 +25,23 @@ else
     BUCKET_NAME=$2  # Set the function name from the first script argument
 fi
 
-aws s3api list-object-versions --profile $PROFILE_NAME --bucket $BUCKET_NAME | \
-   jq -e '.Versions[]? | {Key:.Key, VersionId:.VersionId}' | \
-   while read -r obj; do
-       KEY=$(echo $obj | jq -r .Key);
-       VERSION_ID=$(echo $obj | jq -r .VersionId);
-       if [[ -n "$KEY" && -n "$VERSION_ID" ]]; then
-           aws s3api delete-object --bucket $BUCKET_NAME --key "$KEY" --version-id "$VERSION_ID";
-       else
-           echo "Invalid or empty KEY or VERSION_ID: KEY='$KEY', VERSION_ID='$VERSION_ID'"
-       fi
-   done
 
-#!/bin/bash
+# List all objects in the bucket
+objects=$(aws s3api list-objects --profile $PROFILE_NAME --bucket $BUCKET_NAME --query 'Contents[].{Key: Key}' --output text)
 
-# List all buckets
-buckets=$(aws s3api list-buckets --query "Buckets[].Name" --output text)
+# Check if the bucket is not empty
+if [ -n "$objects" ]; then
+    echo "Deleting objects in bucket: $BUCKET_NAME"
 
-# Loop through each bucket
-for bucket in $buckets; do
-    echo "Checking bucket: $bucket"
+    # Delete all objects in the bucket
+    while read -r key; do
+        aws s3api delete-object --profile $PROFILE_NAME --bucket $BUCKET_NAME --key "$key"
+    done <<< "$objects"
 
-    # List all objects in the bucket
-    objects=$(aws s3api list-objects --bucket $bucket --query 'Contents[].{Key: Key}' --output text)
-
-    # Check if the bucket is not empty
-    if [ -n "$objects" ]; then
-        echo "Deleting objects in bucket: $bucket"
-
-        # Delete all objects in the bucket
-        while read -r key; do
-            aws s3api delete-object --bucket "$bucket" --key "$key"
-        done <<< "$objects"
-
-        echo "Objects deleted in bucket: $bucket"
-    else
-        echo "Bucket $bucket is empty or does not exist."
-    fi
-done
+    echo "Objects deleted in bucket: $BUCKET_NAME"
+else
+echo "Bucket $BUCKET_NAME is empty or does not exist."
+fi
 
 
 
