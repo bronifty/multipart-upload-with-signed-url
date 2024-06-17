@@ -20,7 +20,8 @@ buckets=$(aws s3api list-buckets --profile $PROFILE_NAME --query "Buckets[].Name
 # Loop through each bucket
 for bucket in $buckets; do
     echo "Deleting bucket: $bucket"
-    aws s3api delete-bucket --profile $PROFILE_NAME --bucket $bucket
+    aws s3 rb s3://$bucket --profile $PROFILE_NAME --force
 done
 
+# aws s3 rb s3://<bucket-name> --force
 
