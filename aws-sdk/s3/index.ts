@@ -1,3 +1,4 @@
 export * from "./createS3Client";
 export * from "./deleteBucket";
-export * from "./listBuckets";
+export * from "./emptyBucket";
+export * from "./createBucket";

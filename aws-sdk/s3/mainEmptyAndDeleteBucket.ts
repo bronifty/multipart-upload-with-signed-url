@@ -66,7 +66,7 @@ import { emptyBucket } from "./emptyBucket";
 // }
 
 // Composite function to delete all objects and then the bucket
-async function emptyAndDeleteBucket(
+async function mainEmptyAndDeleteBucket(
   profile: string = "default",
   bucketName: string
 ): Promise<void> {
@@ -75,4 +75,4 @@ async function emptyAndDeleteBucket(
 }
 
 // Usage example
-emptyAndDeleteBucket("sst", "bronifty-sst").catch(console.error);
+mainEmptyAndDeleteBucket("sst", "bronifty-sst").catch(console.error);
