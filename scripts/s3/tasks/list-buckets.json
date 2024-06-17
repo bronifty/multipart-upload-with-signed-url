@@ -1,0 +1,36 @@
+{
+  "Buckets": [
+    {
+      "Name": "bronifty-sst",
+      "CreationDate": "2024-06-09T00:42:34+00:00"
+    },
+    {
+      "Name": "bronifty-website",
+      "CreationDate": "2024-06-13T18:24:17+00:00"
+    },
+    {
+      "Name": "cdk-hnb659fds-assets-533266994320-us-east-1",
+      "CreationDate": "2024-06-12T21:46:11+00:00"
+    },
+    {
+      "Name": "hosting-main-cf-main-hostinghostinginfrastructureh-ekxybvztdmcw",
+      "CreationDate": "2024-06-12T23:35:54+00:00"
+    },
+    {
+      "Name": "hosting-main-cf-main-hostingpipelineinfrastructure-mhe2djjxrzr3",
+      "CreationDate": "2024-06-12T23:35:54+00:00"
+    },
+    {
+      "Name": "hosting-main-cloudfront-h-hostinghostinginfrastruc-891hrpsvlpoa",
+      "CreationDate": "2024-06-12T21:53:03+00:00"
+    },
+    {
+      "Name": "hosting-main-cloudfront-h-hostingpipelineinfrastru-dkz3erjmfjpx",
+      "CreationDate": "2024-06-12T21:53:03+00:00"
+    }
+  ],
+  "Owner": {
+    "DisplayName": "sst2",
+    "ID": "4b64ab64e589e76f1ffbb3b26504e67af9585b9e43d412dc6456395d2c6f8b19"
+  }
+}

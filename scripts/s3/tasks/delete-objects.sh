@@ -3,7 +3,7 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 # Source the scripts using the script directory path
-source $SCRIPT_DIR/../variables.sh
+source $SCRIPT_DIR/../../variables.sh
 
 # Check if both a function name and API name were passed as arguments
 if [ -z "$1" ] || [ -z "$2" ]; then
@@ -26,11 +26,15 @@ else
 fi
 
 aws s3api list-object-versions --profile $PROFILE_NAME --bucket $BUCKET_NAME | \
-   jq '.Versions[] | {Key:.Key, VersionId:.VersionId}' | \
+   jq -e '.Versions[]? | {Key:.Key, VersionId:.VersionId}' | \
    while read -r obj; do
        KEY=$(echo $obj | jq -r .Key);
        VERSION_ID=$(echo $obj | jq -r .VersionId);
-       aws s3api delete-object --bucket YOUR_BUCKET_NAME --key "$KEY" --version-id "$VERSION_ID";
+       if [[ -n "$KEY" && -n "$VERSION_ID" ]]; then
+           aws s3api delete-object --bucket $BUCKET_NAME --key "$KEY" --version-id "$VERSION_ID";
+       else
+           echo "Invalid or empty KEY or VERSION_ID: KEY='$KEY', VERSION_ID='$VERSION_ID'"
+       fi
    done
 
 #    aws s3api list-object-versions --bucket YOUR_BUCKET_NAME | \
