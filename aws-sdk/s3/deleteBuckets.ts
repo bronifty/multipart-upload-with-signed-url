@@ -64,7 +64,7 @@ async function deleteBucket(
 
 // Composite function to delete all objects and then the bucket
 async function emptyAndDeleteBucket(
-  profile: string,
+  profile: string = "default",
   bucketName: string
 ): Promise<void> {
   await deleteAllObjectsInBucket(profile, bucketName);
