@@ -35,6 +35,7 @@ if [ -n "$objects" ]; then
 
     # Delete all objects in the bucket
     while read -r key; do
+        echo "Deleting object: $key from bucket: $BUCKET_NAME"
         aws s3api delete-object --profile $PROFILE_NAME --bucket $BUCKET_NAME --key "$key"
     done <<< "$objects"
 
