@@ -6,7 +6,7 @@ executable:
 	chmod -R +x .
 
 clean:
-	pnpx tsx clean.ts
+	./scripts/admin-desktop/clean.sh
 
 check-variables:
 	./scripts/admin-desktop/check-variables.sh
