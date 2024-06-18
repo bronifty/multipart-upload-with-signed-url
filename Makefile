@@ -5,6 +5,9 @@ all: engine-start engine-dev engine-install api-get-all api-get-one api-add-one 
 executable:
 	chmod -R +x .
 
+clean:
+	pnpx tsx clean.ts
+
 check-variables:
 	./scripts/admin-desktop/check-variables.sh
 
@@ -15,9 +18,6 @@ login:
 bootstrap:
 	./scripts/admin-cloud/bootstrap.sh
 
-# app-admin
-clean:
-	./scripts/app-clean.sh	
 
 app-dev:
 	./scripts/app-dev.sh

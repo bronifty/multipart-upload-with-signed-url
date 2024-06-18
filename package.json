@@ -9,7 +9,7 @@
     "aws-sdk-install": "pnpm --prefix ./aws-sdk install",
     "aws-sdk-start": "pnpm --prefix ./aws-sdk start",
     "sdk": "pnpm aws-sdk-install && pnpm aws-sdk-start",
-    "clean": "rm -rf node_modules **/node_modules"
+    "clean": "tsx clean.ts"
   },
   "keywords": [],
   "author": "bronifty",
@@ -18,10 +18,8 @@
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
     "@types/node": "^20.14.5",
+    "fast-glob": "^3.3.2",
     "tsx": "^4.15.6",
     "typescript": "^5.4.5"
-  },
-  "dependencies": {
-    "fast-glob": "^3.3.2"
   }
 }
