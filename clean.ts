@@ -2,14 +2,25 @@ import { glob, unlink, rm } from "node:fs/promises";
 import fg from "fast-glob";
 
 (async () => {
-  for await (const file of fg.stream(`${import.meta.dirname}/**/*`, {
-    followSymbolicLinks: true,
-  })) {
-    console.log(file);
-    // Optionally handle node_modules or other specific cases
-    if (file.includes("/node_modules/")) {
-      await rm(file, { recursive: true, force: true });
+  const directories = new Set();
+
+  // First, collect all directories that contain 'node_modules'
+  for await (const file of fg.stream(
+    `${import.meta.dirname}/**/node_modules/**/*`,
+    {
+      onlyDirectories: true,
+      followSymbolicLinks: true,
     }
+  )) {
+    // This will capture the path up to and including 'node_modules'
+    const dirPath = file.split("/node_modules")[0] + "/node_modules";
+    directories.add(dirPath);
+  }
+
+  // Now, remove each collected directory
+  for (const dir of directories) {
+    console.log(`Removing directory: ${dir}`);
+    await rm(dir, { recursive: true, force: true });
   }
 })();
 

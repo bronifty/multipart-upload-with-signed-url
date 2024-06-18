@@ -6,9 +6,7 @@
   "scripts": {
     "cdk": "pnpm --prefix ./packages/infra cdk",
     "prepare:frontend": "node packages/scripts/populate-frontend-config.js",
-    "start:frontend": "pnpm --prefix ./packages/frontend start",
-    "build:backend": "cd packages/backend && yarn build",
-    "build:frontend": "cd packages/frontend && yarn build"
+    "start:frontend": "pnpm --prefix ./packages/frontend start"
   },
   "keywords": [],
   "author": "bronifty",
