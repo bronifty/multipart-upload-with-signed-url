@@ -50,6 +50,7 @@ SERVER:
 
 ### Links
 
+- [learning with jason starring matteo](https://www.youtube.com/watch?v=evCnOaVaOTo)
 - [cloudfront-hosting-toolkit](https://blog.awsfundamentals.com/cloudfront-hosting-toolkit?utm_source=pocket_shared)
 - [aws-sdkv3-js-notes-app](https://github.com/aws-samples/aws-sdk-js-notes-app)
 - [accelerating server side development with fastify](https://read.amazon.com/?asin=B0B2PR8RQY&ref_=kwl_kr_iv_rec_16)
