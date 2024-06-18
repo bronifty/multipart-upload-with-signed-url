@@ -7,8 +7,7 @@
 // } from "@aws-sdk/client-s3";
 // import { fromIni } from "@aws-sdk/credential-provider-ini";
 
-import { deleteBucket } from ".";
-import { emptyBucket } from "./emptyBucket";
+import { emptyBucket, deleteBucket } from ".";
 
 // Function to initialize S3 client with a specific profile
 // function createS3Client(profile: string): S3Client {
