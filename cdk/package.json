@@ -1,0 +1,25 @@
+{
+  "name": "cdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cdk": "pnpm --prefix ./packages/infra cdk",
+    "prepare:frontend": "node packages/scripts/populate-frontend-config.js",
+    "start:frontend": "pnpm --prefix ./packages/frontend start",
+    "build:backend": "cd packages/backend && yarn build",
+    "build:frontend": "cd packages/frontend && yarn build"
+  },
+  "keywords": [],
+  "author": "bronifty",
+  "license": "ISC",
+  "engines": {
+    "node": ">=22.3.0"
+  },
+  "type": "module",
+  "devDependencies": {
+    "esbuild": "^0.21.5",
+    "tsx": "^4.15.6",
+    "typescript": "~5.4.5"
+  }
+}
