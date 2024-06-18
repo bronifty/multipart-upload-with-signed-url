@@ -1,7 +1,11 @@
 import { listBuckets } from ".";
 
 async function mainListBuckets(profile: string = "default"): Promise<void> {
-  await listBuckets(profile);
+  const buckets = await listBuckets(profile);
+  if (!buckets) return;
+  console.log(
+    `Buckets: ${buckets.Buckets.map((bucket) => bucket.Name).join(", ")}`
+  );
 }
 
 // Usage example
