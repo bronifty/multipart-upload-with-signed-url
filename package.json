@@ -12,7 +12,9 @@
     "clean": "tsx clean.ts",
     "cdk-install": "pnpm i && pnpm --prefix ./cdk install && pnpm --prefix ./cdk/packages/infra/ install",
     "cdk-deploy": "pnpm --prefix ./cdk cdk deploy",
-    "cdk-destroy": "pnpm --prefix ./cdk cdk destroy"
+    "cdk-destroy": "pnpm --prefix ./cdk cdk destroy",
+    "cdk-frontend": "pnpm --prefix ./cdk/packages/frontend/ install && node ./cdk/packages/scripts/populate-frontend-config.js",
+    "cdk-start": "pnpm --prefix ./cdk/packages/frontend/ start"
   },
   "keywords": [],
   "author": "bronifty",
