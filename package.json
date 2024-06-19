@@ -9,7 +9,7 @@
     "aws-sdk-install": "pnpm --prefix ./aws-sdk install",
     "aws-sdk-start": "pnpm --prefix ./aws-sdk start",
     "sdk": "pnpm aws-sdk-install && pnpm aws-sdk-start",
-    "clean": "pnpm i && tsx clean.ts > output.log 2>&1",
+    "clean": "pnpm i && tsx clean.ts",
     "cdk-install": "pnpm i && pnpm --prefix ./cdkv2/infra/ install && pnpm --prefix ./cdkv2/frontend/ install",
     "cdk-deploy": "pnpm --prefix ./cdkv2/infra cdk deploy",
     "cdk-destroy": "pnpm --prefix ./cdkv2/infra cdk destroy",
@@ -21,7 +21,6 @@
   "packageManager": "pnpm@9.1.3+sha512.7c2ea089e1a6af306409c4fc8c4f0897bdac32b772016196c469d9428f1fe2d5a21daf8ad6512762654ac645b5d9136bb210ec9a00afa8dbc4677843ba362ecd",
   "devDependencies": {
     "@types/node": "^20.14.5",
-    "fast-glob": "^3.3.2",
     "tsx": "^4.15.6"
   }
 }
