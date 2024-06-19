@@ -13,8 +13,7 @@
     "cdk-install": "pnpm i && pnpm --prefix ./cdk/packages/infra/ install && pnpm --prefix ./cdk/packages/frontend/ install",
     "cdk-deploy": "pnpm --prefix ./cdk/packages/infra cdk deploy",
     "cdk-destroy": "pnpm --prefix ./cdk/packages/infra cdk destroy",
-    "cdk-frontend": "pnpm --prefix ./cdk/packages/frontend/ install && node ./cdk/packages/scripts/populate-frontend-config.js",
-    "cdk-start": "pnpm --prefix ./cdk/packages/frontend/ start"
+    "cdk-frontend": "node ./cdk/packages/scripts/populate-frontend-config.js && pnpm --prefix ./cdk/packages/frontend/ start"
   },
   "keywords": [],
   "author": "bronifty",

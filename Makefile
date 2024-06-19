@@ -1,5 +1,5 @@
 # Makefile
-all: engine-start engine-dev engine-install api-get-all api-get-one api-add-one api-delete-one api-delete-all function-get-all function-get-one function-deploy function-update function-invoke function-delete-one function-delete-all clean check-variables cdk-bootstrap
+all: engine-start engine-dev engine-install api-get-all api-get-one api-add-one api-delete-one api-delete-all function-get-all function-get-one function-deploy function-update function-invoke function-delete-one function-delete-all clean check-variables cdk-bootstrap cdk-install
 
 # desktop-admin
 executable:
@@ -8,15 +8,17 @@ executable:
 clean:
 	pnpm i && pnpx tsx clean.ts
 
-check-variables:
-	./scripts/admin-desktop/check-variables.sh
-
-# admin-cloud
 login:
 	./scripts/admin-cloud/login.sh
 
 bootstrap:
 	./scripts/admin-cloud/bootstrap.sh
+
+cdk-install:
+	pnpm cdk-install
+
+check-variables:
+	./scripts/admin-desktop/check-variables.sh
 
 
 app-dev:
@@ -105,5 +107,5 @@ api-create-default-route:
 	./scripts/api/3-api-create-default-route.sh $(api) $(integration)
 
 
-.PHONY: all engine-start engine-dev engine-install api-get-all api-get-one api-add-one api-delete-one api-delete-all function-get-all function-get-one function-deploy function-update function-invoke function-delete-one function-delete-all clean check-variables cdk-bootstrap
+.PHONY: all engine-start engine-dev engine-install api-get-all api-get-one api-add-one api-delete-one api-delete-all function-get-all function-get-one function-deploy function-update function-invoke function-delete-one function-delete-all clean check-variables cdk-bootstrap cdk-install
 
