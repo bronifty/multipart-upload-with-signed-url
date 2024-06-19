@@ -17,6 +17,15 @@ bootstrap:
 cdk-install:
 	pnpm cdk-install
 
+cdk-deploy:
+	pnpm cdk-deploy
+
+cdk-frontend:
+	pnpm cdk-frontend
+
+cdk-destroy:
+	pnpm cdk-destroy
+
 check-variables:
 	./scripts/admin-desktop/check-variables.sh
 
