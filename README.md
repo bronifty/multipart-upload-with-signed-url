@@ -101,3 +101,4 @@ pnpm i && tsx clean.ts > output.log 2>&1
 ```
 
 2 is standard error, redirect (>) that to same as 1, which is standard out
+...
