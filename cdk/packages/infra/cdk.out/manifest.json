@@ -1,0 +1,365 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "aws-sdk-js-notes-app.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "aws-sdk-js-notes-app.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "aws-sdk-js-notes-app": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "aws-sdk-js-notes-app.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1963adcbc7587db81f267065f150fd136daf863b696242061efe3eef599fd14e.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "aws-sdk-js-notes-app.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "aws-sdk-js-notes-app.assets"
+      ],
+      "metadata": {
+        "/aws-sdk-js-notes-app/notes/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "notesAF81B09D"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointE7B9679B"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/CloudWatchRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointCloudWatchRole52213BC3"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Account": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointAccount6DA1D142"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointDeployment457D977D2b3307eba3c7fe1a36b3de6fe09a0bb0"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/DeploymentStage.prod/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointDeploymentStageprod2CD5F9C4"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointEndpoint5E1E9134"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesF7F33EB6"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/GET/ApiPermission.awssdkjsnotesappendpointB9DE46D1.GET..notes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesGETApiPermissionawssdkjsnotesappendpointB9DE46D1GETnotesDAB79BA2"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/GET/ApiPermission.Test.awssdkjsnotesappendpointB9DE46D1.GET..notes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesGETApiPermissionTestawssdkjsnotesappendpointB9DE46D1GETnotes509F954A"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesGETFA0BD3D8"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/POST/ApiPermission.awssdkjsnotesappendpointB9DE46D1.POST..notes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesPOSTApiPermissionawssdkjsnotesappendpointB9DE46D1POSTnotes829BAAF9"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/POST/ApiPermission.Test.awssdkjsnotesappendpointB9DE46D1.POST..notes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesPOSTApiPermissionTestawssdkjsnotesappendpointB9DE46D1POSTnotes786D34A1"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesPOST22F9725C"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/{id}/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesid284FFD82"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/{id}/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesidOPTIONS6939D830"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/{id}/GET/ApiPermission.awssdkjsnotesappendpointB9DE46D1.GET..notes.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesidGETApiPermissionawssdkjsnotesappendpointB9DE46D1GETnotesidDD0753B4"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/{id}/GET/ApiPermission.Test.awssdkjsnotesappendpointB9DE46D1.GET..notes.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesidGETApiPermissionTestawssdkjsnotesappendpointB9DE46D1GETnotesidBE3C12BB"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/{id}/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesidGETDA67C376"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/{id}/PUT/ApiPermission.awssdkjsnotesappendpointB9DE46D1.PUT..notes.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesidPUTApiPermissionawssdkjsnotesappendpointB9DE46D1PUTnotesidCBABA7E8"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/{id}/PUT/ApiPermission.Test.awssdkjsnotesappendpointB9DE46D1.PUT..notes.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesidPUTApiPermissionTestawssdkjsnotesappendpointB9DE46D1PUTnotesidD4090601"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/{id}/PUT/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesidPUTA29F9F3F"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/{id}/DELETE/ApiPermission.awssdkjsnotesappendpointB9DE46D1.DELETE..notes.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesidDELETEApiPermissionawssdkjsnotesappendpointB9DE46D1DELETEnotesidB0EE57FD"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/{id}/DELETE/ApiPermission.Test.awssdkjsnotesappendpointB9DE46D1.DELETE..notes.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesidDELETEApiPermissionTestawssdkjsnotesappendpointB9DE46D1DELETEnotesidB609D3F0"
+          }
+        ],
+        "/aws-sdk-js-notes-app/endpoint/Default/notes/{id}/DELETE/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "endpointnotesidDELETEAD0C5CAD"
+          }
+        ],
+        "/aws-sdk-js-notes-app/list/list-lambda-role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "listlistlambdarole1B2D45E8"
+          }
+        ],
+        "/aws-sdk-js-notes-app/list/list-lambda-role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "listlistlambdaroleDefaultPolicy6D04A7BE"
+          }
+        ],
+        "/aws-sdk-js-notes-app/list/list/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "list55E002CE"
+          }
+        ],
+        "/aws-sdk-js-notes-app/create/create-lambda-role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "createcreatelambdarole32B95856"
+          }
+        ],
+        "/aws-sdk-js-notes-app/create/create-lambda-role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "createcreatelambdaroleDefaultPolicy93B51975"
+          }
+        ],
+        "/aws-sdk-js-notes-app/create/create/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "create1A0F2F2D"
+          }
+        ],
+        "/aws-sdk-js-notes-app/get/get-lambda-role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "getgetlambdaroleA0B52ED5"
+          }
+        ],
+        "/aws-sdk-js-notes-app/get/get-lambda-role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "getgetlambdaroleDefaultPolicy8E5BE844"
+          }
+        ],
+        "/aws-sdk-js-notes-app/get/get/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "get868C1774"
+          }
+        ],
+        "/aws-sdk-js-notes-app/update/update-lambda-role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "updateupdatelambdarole746C985D"
+          }
+        ],
+        "/aws-sdk-js-notes-app/update/update-lambda-role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "updateupdatelambdaroleDefaultPolicy0B550DEB"
+          }
+        ],
+        "/aws-sdk-js-notes-app/update/update/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "update20AF9D86"
+          }
+        ],
+        "/aws-sdk-js-notes-app/delete/delete-lambda-role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "deletedeletelambdaroleC5003F30"
+          }
+        ],
+        "/aws-sdk-js-notes-app/delete/delete-lambda-role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "deletedeletelambdaroleDefaultPolicy21DFBF00"
+          }
+        ],
+        "/aws-sdk-js-notes-app/delete/delete/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "deleteA4D1022C"
+          }
+        ],
+        "/aws-sdk-js-notes-app/files-bucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "filesbucket2B30D8E0"
+          }
+        ],
+        "/aws-sdk-js-notes-app/identity-pool": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "identitypool"
+          }
+        ],
+        "/aws-sdk-js-notes-app/unauthenticated-role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "unauthenticatedroleEE7E3E0D"
+          }
+        ],
+        "/aws-sdk-js-notes-app/unauthenticated-role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "unauthenticatedroleDefaultPolicy2436F037"
+          }
+        ],
+        "/aws-sdk-js-notes-app/role-attachment": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "roleattachment"
+          }
+        ],
+        "/aws-sdk-js-notes-app/FilesBucket": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FilesBucket"
+          }
+        ],
+        "/aws-sdk-js-notes-app/GatewayUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GatewayUrl"
+          }
+        ],
+        "/aws-sdk-js-notes-app/IdentityPoolId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IdentityPoolId"
+          }
+        ],
+        "/aws-sdk-js-notes-app/Region": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Region"
+          }
+        ],
+        "/aws-sdk-js-notes-app/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/aws-sdk-js-notes-app/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/aws-sdk-js-notes-app/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/aws-sdk-js-notes-app/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "aws-sdk-js-notes-app"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

@@ -9,7 +9,10 @@
     "aws-sdk-install": "pnpm --prefix ./aws-sdk install",
     "aws-sdk-start": "pnpm --prefix ./aws-sdk start",
     "sdk": "pnpm aws-sdk-install && pnpm aws-sdk-start",
-    "clean": "tsx clean.ts"
+    "clean": "tsx clean.ts",
+    "cdk-install": "pnpm i && pnpm --prefix ./cdk install && pnpm --prefix ./cdk/packages/infra/ install",
+    "cdk-deploy": "pnpm --prefix ./cdk cdk deploy",
+    "cdk-destroy": "pnpm --prefix ./cdk cdk destroy"
   },
   "keywords": [],
   "author": "bronifty",
