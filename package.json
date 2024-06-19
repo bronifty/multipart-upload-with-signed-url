@@ -13,7 +13,7 @@
     "cdk-install": "pnpm i && pnpm --prefix ./cdkv2/infra/ install && pnpm --prefix ./cdkv2/frontend/ install",
     "cdk-deploy": "pnpm --prefix ./cdkv2/infra cdk deploy",
     "cdk-destroy": "pnpm --prefix ./cdkv2/infra cdk destroy",
-    "cdk-frontend": "node ./cdkv2/scripts/populate-frontend-config.cjs && pnpm --prefix ./cdkv2/frontend/ start"
+    "cdk-frontend": "tsx ./cdkv2/scripts/populate-frontend-config.ts && pnpm --prefix ./cdkv2/frontend/ start"
   },
   "keywords": [],
   "author": "bronifty",

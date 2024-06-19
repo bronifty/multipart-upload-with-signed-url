@@ -1,19 +1,21 @@
 import { exec } from "child_process";
 import { join } from "path";
-import { readFileSync, writeFileSync, unlinkSync } from "fs";
+import { existsSync, readFileSync, writeFileSync, unlinkSync } from "node:fs";
 function metaPath(path = "") {
-  return `${import.meta.dirname}/../${path}`;
+  return `${import.meta.dirname}/${path}`;
 }
 
 (async () => {
   const cdkOutputsFile = metaPath(
-    `scripts/tmp.${Math.ceil(Math.random() * 10 ** 10)}.json`
+    `tmp.${Math.ceil(Math.random() * 10 ** 10)}.json`
   );
-  const configEnv = metaPath("frontend/.env");
+  const configEnv = metaPath("../frontend/.env");
 
   try {
     const execProcess = exec(
-      `${metaPath("infra")} cdk deploy --outputs-file ${cdkOutputsFile}`
+      `pnpm --prefix ${metaPath(
+        "../infra"
+      )} cdk deploy --outputs-file ${cdkOutputsFile}`
     );
     execProcess.stdout.pipe(process.stdout);
     execProcess.stderr.pipe(process.stderr);
@@ -45,6 +47,17 @@ function metaPath(path = "") {
     console.log(`Error while updating .env: ${error}`);
   }
 
+  // const cdkOutputsFile = "./scripts/tmp.3702436577.json"; // Adjust the path as necessary
+
+  try {
+    if (existsSync(cdkOutputsFile)) {
+      unlinkSync(cdkOutputsFile);
+    } else {
+      console.log("Temporary file does not exist, no need to delete.");
+    }
+  } catch (error) {
+    console.error("Error while deleting temporary file:", error);
+  }
   // Delete outputsFile
-  unlinkSync(cdkOutputsFile);
+  // unlinkSync(cdkOutputsFile);
 })();
