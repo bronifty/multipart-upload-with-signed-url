@@ -1,23 +1,30 @@
 {
-  "name": "cdk",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "packages/infra",
+    "packages/backend",
+    "packages/frontend"
+  ],
   "scripts": {
-    "cdk": "pnpm --prefix ./packages/infra cdk",
+    "cdk": "cd packages/infra && yarn cdk",
+    "build:backend": "cd packages/backend && yarn build",
     "prepare:frontend": "node packages/scripts/populate-frontend-config.js",
-    "start:frontend": "pnpm --prefix ./packages/frontend start"
+    "build:frontend": "cd packages/frontend && yarn build",
+    "start:frontend": "cd packages/frontend && yarn start"
   },
-  "keywords": [],
-  "author": "bronifty",
-  "license": "ISC",
-  "engines": {
-    "node": ">=22.3.0"
-  },
-  "type": "module",
   "devDependencies": {
-    "esbuild": "^0.21.5",
-    "tsx": "^4.15.6",
-    "typescript": "~5.4.5"
-  }
+    "esbuild": "^0.20.2",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.1.2",
+    "prettier": "2.4.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js,md}": "prettier --write"
+  },
+  "packageManager": "yarn@4.1.1"
 }
