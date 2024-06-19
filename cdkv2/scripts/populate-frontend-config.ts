@@ -1,15 +1,20 @@
-const { exec } = require("child_process");
-const { join } = require("path");
-const { readFileSync, writeFileSync, unlinkSync } = require("fs");
+import { exec } from "child_process";
+import { join } from "path";
+import { readFileSync, writeFileSync, unlinkSync } from "fs";
+function metaPath(path = "") {
+  return `${import.meta.dirname}/../${path}`;
+}
 
 (async () => {
-  const cdkOutputsFile = join(__dirname, `tmp.${Math.ceil(Math.random() * 10 ** 10)}.json`);
-  const configEnv = join(__dirname, "..", "frontend", ".env");
+  const cdkOutputsFile = metaPath(
+    `tmp.${Math.ceil(Math.random() * 10 ** 10)}.json`
+  );
+  const configEnv = metaPath("frontend/.env");
 
   try {
-    const execProcess = exec(`yarn cdk deploy --outputs-file ${cdkOutputsFile}`, {
-      cwd: join(__dirname, "..", "infra"),
-    });
+    const execProcess = exec(
+      `cd .. && pnpm --prefix ./cdkv2/infra cdk deploy --outputs-file ${cdkOutputsFile}`
+    );
     execProcess.stdout.pipe(process.stdout);
     execProcess.stderr.pipe(process.stderr);
     await new Promise((resolve) => {
@@ -21,7 +26,9 @@ const { readFileSync, writeFileSync, unlinkSync } = require("fs");
 
   // Populate frontend config with data from outputsFile
   try {
-    const cdkOutput = JSON.parse(readFileSync(cdkOutputsFile))["aws-sdk-js-notes-app"];
+    const cdkOutput = JSON.parse(readFileSync(cdkOutputsFile))[
+      "aws-sdk-js-notes-app"
+    ];
     const config = {
       VITE_FILES_BUCKET: cdkOutput.FilesBucket,
       VITE_GATEWAY_URL: cdkOutput.GatewayUrl,
