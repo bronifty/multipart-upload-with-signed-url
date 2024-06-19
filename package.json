@@ -9,7 +9,7 @@
     "aws-sdk-install": "pnpm --prefix ./aws-sdk install",
     "aws-sdk-start": "pnpm --prefix ./aws-sdk start",
     "sdk": "pnpm aws-sdk-install && pnpm aws-sdk-start",
-    "clean": "tsx clean.ts",
+    "clean": "pnpm i && tsx clean.ts > output.log 2>&1",
     "cdk-install": "pnpm i && pnpm --prefix ./cdk/packages/infra/ install && pnpm --prefix ./cdk/packages/frontend/ install",
     "cdk-deploy": "pnpm --prefix ./cdk/packages/infra cdk deploy",
     "cdk-destroy": "pnpm --prefix ./cdk/packages/infra cdk destroy",

@@ -6,7 +6,7 @@ executable:
 	chmod -R +x .
 
 clean:
-	pnpm i && pnpx tsx clean.ts
+	pnpm clean
 
 login:
 	./scripts/admin-cloud/login.sh
