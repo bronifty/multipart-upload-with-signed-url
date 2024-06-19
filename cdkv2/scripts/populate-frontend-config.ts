@@ -7,13 +7,13 @@ function metaPath(path = "") {
 
 (async () => {
   const cdkOutputsFile = metaPath(
-    `tmp.${Math.ceil(Math.random() * 10 ** 10)}.json`
+    `scripts/tmp.${Math.ceil(Math.random() * 10 ** 10)}.json`
   );
   const configEnv = metaPath("frontend/.env");
 
   try {
     const execProcess = exec(
-      `cd .. && pnpm --prefix ./cdkv2/infra cdk deploy --outputs-file ${cdkOutputsFile}`
+      `${metaPath("infra")} cdk deploy --outputs-file ${cdkOutputsFile}`
     );
     execProcess.stdout.pipe(process.stdout);
     execProcess.stderr.pipe(process.stderr);
