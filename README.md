@@ -71,3 +71,25 @@ The sdkv3 will be the main tool for interacting with the services, but getting t
 I wanted to make this a monorepo but i kept getting stuck on how the node_modules folder is hoisted or not into each package and app. I may not want to install every separate package and app's deps globally, so I think putting a package.json in the root with some scripts that can use --prefix is good enough. I don't need to make it a proper monorepo that does the weird caching and hoisting thing. I may change my opinion, but for now, that is the simplest and most straightforward approach I can think of when i want to rapidly fire off these requests and capture these responses and get fast feedback in my development.
 
 https://nodejs.org/api/wasi.html
+
+### Clean
+
+// In the provided TypeScript code snippet from [multipart-upload-with-signed-url/clean.ts](file:///Users/bro/codes/fastify/multipart-upload-with-signed-url/clean.ts#1%2C1-1%2C1), the [dirPath](file:///Users/bro/codes/fastify/multipart-upload-with-signed-url/clean.ts#17%2C15-17%2C15) calculation is designed to identify and construct the path of the directory that contains either [node_modules](file:///Users/bro/codes/fastify/multipart-upload-with-signed-url/clean.ts#10%2C23-10%2C23), `cdk.out`, or [dist](file:///Users/bro/codes/fastify/multipart-upload-with-signed-url/clean.ts#12%2C23-12%2C23) within the file path. Here's a breakdown of how it works:
+
+```typescript
+file.split(/\/(node_modules|cdk.out|dist)\//)[0];
+```
+
+This part of the code uses a regular expression to split the `file` path at the first occurrence of any of the directories `node_modules`, `cdk.out`, or `dist`. The `[0]` at the end of the split function fetches the portion of the path before this directory. For example, if `file` is `/home/user/project/node_modules/package/index.js`, this expression returns `/home/user/project`.
+
+```typescript
+file.match(/\/(node_modules|cdk.out|dist)\//)[0];
+```
+
+This part uses the same regular expression to find the first occurrence of `/node_modules/`, `/cdk.out/`, or `/dist/` in the `file` path. The `[0]` fetches the matched string including the slashes, e.g., `/node_modules/`.
+
+3. **Concatenation**:
+
+   The two parts are concatenated to form the complete directory path that needs to be considered for removal. Continuing with the previous example, concatenating the results of the split and match operations gives `/home/user/project/node_modules/`.
+
+This approach ensures that the script correctly identifies the full path of the directories to be removed, including the specific subdirectory (`node_modules`, `cdk.out`, or `dist`) that triggered the match. This is crucial for accurately targeting directories for cleanup without affecting other parts of the filesystem unintentionally.

@@ -6,7 +6,6 @@ import { glob, rm, lstat } from "node:fs/promises";
   for await (const file of glob(`${import.meta.dirname}/**`, {
     nodir: false,
   })) {
-    console.log(`Checking file: ${file}`); // Log each file path being checked
     if (
       file.includes("/node_modules/") ||
       file.includes("/cdk.out/") ||
