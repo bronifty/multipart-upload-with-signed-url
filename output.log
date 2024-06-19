@@ -1,8 +1,83 @@
-(node:36263) ExperimentalWarning: glob is an experimental feature and might change at any time
+(node:37834) ExperimentalWarning: glob is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/node_modules/fast-glob
 Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/node_modules/tsx
 Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/node_modules/
 Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/node_modules/@types/node
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/node_modules/aws-cdk
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/node_modules/aws-cdk-lib
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/node_modules/constructs
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/node_modules/esbuild
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/node_modules/typescript
+Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/node_modules/
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/node_modules/@types/aws-lambda
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/node_modules/@types/node
+Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/node_modules/
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/node_modules/@tsconfig/node20
+Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/node_modules/
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/node_modules/@aws-sdk/client-dynamodb
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/node_modules/@aws-sdk/lib-dynamodb
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/dist/aws-sdk-js-notes-app-stack.js
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/dist/aws-sdk-js-notes-app.js
+Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/dist/
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/dist/backend/notes-api.create.js
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/dist/backend/notes-api.delete.js
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/dist/backend/notes-api.get.js
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/dist/backend/notes-api.js
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/dist/backend/notes-api.list.js
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/dist/backend/notes-api.update.js
+Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/dist/
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/dist/backend/libs/response.js
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/aws-sdk-js-notes-app.assets.json
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/aws-sdk-js-notes-app.template.json
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/cdk.out
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/manifest.json
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/tree.json
+Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/asset.d0a7f33525461210b770bb32f4b82bb841fd4893bff3bf571b2ff58e84bf128e/index.js
+Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/asset.96ff063696750dbfa59dd392d17b0617174f977479281515a5749f914ef01257/index.js
+Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/asset.6649dd004adde785a566e46b3481808309373dd2a9c20581cd748216a466a639/index.js
+Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/asset.513ca644e7c54fe20275369a74869d483974fabdfbf21970ce2aeb3c77d62b97/index.js
+Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/asset.48bdc7f52c3c4b2c43e658ee88a362675d2b99f9d8f8c0976efe66ebc6673599/index.js
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/p-event
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/react
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/react-bootstrap
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/react-bootstrap-icons
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/react-dom
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/typescript
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/vite
+Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@vitejs/plugin-react-refresh
+Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@types/node
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@types/reach__router
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@types/react
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@types/react-dom
+Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@tsconfig/node20
+Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@reach/router
+Directory added for removal: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@aws-sdk/client-cognito-identity
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@aws-sdk/client-polly
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@aws-sdk/client-s3
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@aws-sdk/client-transcribe-streaming
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@aws-sdk/credential-provider-cognito-identity
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@aws-sdk/polly-request-presigner
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@aws-sdk/s3-request-presigner
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@aws-sdk/util-create-request
+Not a directory or not matching criteria: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/@aws-sdk/util-format-url
 Attempting to remove directory: /Users/bro/codes/fastify/multipart-upload-with-signed-url/node_modules/
 Successfully removed: /Users/bro/codes/fastify/multipart-upload-with-signed-url/node_modules/
+Attempting to remove directory: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/node_modules/
+Successfully removed: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/node_modules/
+Attempting to remove directory: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/dist/
+Successfully removed: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/dist/
+Attempting to remove directory: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/
+Successfully removed: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/infra/cdk.out/
+Attempting to remove directory: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/
+Successfully removed: /Users/bro/codes/fastify/multipart-upload-with-signed-url/cdkv2/frontend/node_modules/
