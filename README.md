@@ -93,3 +93,11 @@ This part uses the same regular expression to find the first occurrence of `/nod
    The two parts are concatenated to form the complete directory path that needs to be considered for removal. Continuing with the previous example, concatenating the results of the split and match operations gives `/home/user/project/node_modules/`.
 
 This approach ensures that the script correctly identifies the full path of the directories to be removed, including the specific subdirectory (`node_modules`, `cdk.out`, or `dist`) that triggered the match. This is crucial for accurately targeting directories for cleanup without affecting other parts of the filesystem unintentionally.
+
+#### Shell command note:
+
+```sh
+pnpm i && tsx clean.ts > output.log 2>&1
+```
+
+2 is standard error, redirect (>) that to same as 1, which is standard out
