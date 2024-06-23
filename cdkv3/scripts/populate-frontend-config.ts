@@ -1,4 +1,5 @@
 import { exec } from "child_process";
+import { join } from "path";
 import { existsSync, readFileSync, writeFileSync, unlinkSync } from "node:fs";
 function metaPath(path = "") {
   return `${import.meta.dirname}/${path}`;

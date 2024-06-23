@@ -29,7 +29,6 @@ cdk-destroy:
 check-variables:
 	./scripts/admin-desktop/check-variables.sh
 
-
 app-dev:
 	./scripts/app-dev.sh
 

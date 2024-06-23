@@ -10,10 +10,10 @@
     "aws-sdk-start": "pnpm --prefix ./aws-sdk start",
     "sdk": "pnpm aws-sdk-install && pnpm aws-sdk-start",
     "clean": "pnpm i && tsx clean.ts",
-    "cdk-install": "pnpm i && pnpm --prefix ./cdkv2/infra/ install && pnpm --prefix ./cdkv2/frontend/ install",
-    "cdk-deploy": "pnpm --prefix ./cdkv2/infra cdk deploy",
-    "cdk-destroy": "pnpm --prefix ./cdkv2/infra cdk destroy",
-    "cdk-frontend": "tsx ./cdkv2/scripts/populate-frontend-config.ts && pnpm --prefix ./cdkv2/frontend/ start"
+    "cdk-install": "pnpm i && pnpm --prefix ./cdkv3/infra/ install && pnpm --prefix ./cdkv3/frontend/ install",
+    "cdk-deploy": "pnpm --prefix ./cdkv3/infra cdk deploy",
+    "cdk-destroy": "pnpm --prefix ./cdkv3/infra cdk destroy",
+    "cdk-frontend": "tsx ./cdkv3/scripts/populate-frontend-config.ts && pnpm --prefix ./cdkv3/frontend/ start"
   },
   "keywords": [],
   "author": "bronifty",
