@@ -51,7 +51,7 @@ function metaPath(path = "") {
 
   try {
     if (existsSync(cdkOutputsFile)) {
-      unlinkSync(cdkOutputsFile);
+      // unlinkSync(cdkOutputsFile); // want to check this file instead of deleting for now
     } else {
       console.log("Temporary file does not exist, no need to delete.");
     }

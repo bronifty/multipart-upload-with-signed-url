@@ -14,12 +14,6 @@ importers:
       '@aws-sdk/lib-dynamodb':
         specifier: 3.564.0
         version: 3.564.0(@aws-sdk/client-dynamodb@3.564.0)
-      aws-cdk-lib:
-        specifier: 2.134.0
-        version: 2.134.0(constructs@10.3.0)
-      constructs:
-        specifier: 10.3.0
-        version: 10.3.0
     devDependencies:
       '@tsconfig/node20':
         specifier: ^20.1.4
@@ -33,6 +27,12 @@ importers:
       aws-cdk:
         specifier: 2.134.0
         version: 2.134.0
+      aws-cdk-lib:
+        specifier: 2.134.0
+        version: 2.134.0(constructs@10.3.0)
+      constructs:
+        specifier: 10.3.0
+        version: 10.3.0
       esbuild:
         specifier: ^0.21.5
         version: 0.21.5
