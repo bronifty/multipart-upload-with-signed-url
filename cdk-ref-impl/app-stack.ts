@@ -6,6 +6,7 @@ import {
   StackProps,
   RemovalPolicy,
 } from "aws-cdk-lib";
+import * as cdk from "aws-cdk-lib";
 import * as s3 from "aws-cdk-lib/aws-s3";
 import * as s3deploy from "aws-cdk-lib/aws-s3-deployment";
 import * as cloudfront from "aws-cdk-lib/aws-cloudfront";
@@ -17,6 +18,14 @@ import { appDir, apiDir } from "./fs";
 export class AppStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
+
+    const table = new cdk.aws_dynamodb.Table(this, "MyTable", {
+      partitionKey: { name: "id", type: cdk.aws_dynamodb.AttributeType.STRING },
+      billingMode: cdk.aws_dynamodb.BillingMode.PAY_PER_REQUEST,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+    });
+
+    // ... existing code ...
 
     const mySiteBucketName = new CfnParameter(this, "bronifty-ssr-bucket", {
       type: "String",
