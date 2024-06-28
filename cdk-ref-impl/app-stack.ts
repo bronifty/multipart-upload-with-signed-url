@@ -12,9 +12,9 @@ import * as cloudfront from "aws-cdk-lib/aws-cloudfront";
 import * as origins from "aws-cdk-lib/aws-cloudfront-origins";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import { Construct } from "constructs";
-import { appDir, apiDir } from "./utils/fs";
+import { appDir, apiDir } from "./fs";
 
-export class AwsSdkJsNotesAppStack extends Stack {
+export class AppStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
@@ -54,17 +54,17 @@ export class AwsSdkJsNotesAppStack extends Stack {
       "RoutingFunction",
       {
         code: cloudfront.FunctionCode.fromInline(`
-        function handler(event) {
-          var request = event.request;
-          var uri = request.uri;
-          
-          if (uri.startsWith('/ssr')) {
-            request.uri = '/ssr';
+          function handler(event) {
+            var request = event.request;
+            var uri = request.uri;
+            
+            if (uri.startsWith('/ssr')) {
+              request.uri = '/ssr';
+            }
+            
+            return request;
           }
-          
-          return request;
-        }
-      `),
+        `),
       }
     );
 
