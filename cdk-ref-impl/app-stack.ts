@@ -13,13 +13,16 @@ import * as cloudfront from "aws-cdk-lib/aws-cloudfront";
 import * as origins from "aws-cdk-lib/aws-cloudfront-origins";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import { Construct } from "constructs";
-import { appDir, apiDir } from "./fs";
+import { appDir, apiDir } from "./utils/fs";
+import { getSuffixFromStack } from "./utils/suffix";
 
 export class AppStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const table = new cdk.aws_dynamodb.Table(this, "MyTable", {
+    const suffix = getSuffixFromStack(this);
+
+    const table = new cdk.aws_dynamodb.Table(this, `table-${suffix}`, {
       partitionKey: { name: "id", type: cdk.aws_dynamodb.AttributeType.STRING },
       billingMode: cdk.aws_dynamodb.BillingMode.PAY_PER_REQUEST,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
@@ -27,28 +30,34 @@ export class AppStack extends Stack {
 
     // ... existing code ...
 
-    const mySiteBucketName = new CfnParameter(this, "bronifty-ssr-bucket", {
-      type: "String",
-      description: "The name of S3 bucket to upload react application",
-    });
+    const siteBucketParameter = new CfnParameter(
+      this,
+      `site-bucket-name-${suffix}`,
+      {
+        type: "String",
+        description: "The name of S3 bucket to upload react application",
+      }
+    );
 
-    const mySiteBucket = new s3.Bucket(this, "ssr-site", {
-      bucketName: mySiteBucketName.valueAsString,
+    const siteBucket = new s3.Bucket(this, `site-bucket-id-${suffix}`, {
+      bucketName: siteBucketParameter.valueAsString,
       websiteIndexDocument: "index.html",
       websiteErrorDocument: "error.html",
       publicReadAccess: false,
       removalPolicy: RemovalPolicy.DESTROY,
     });
-    new CfnOutput(this, "Bucket", { value: mySiteBucket.bucketName });
+    new CfnOutput(this, `site-bucket-${suffix}`, {
+      value: siteBucket.bucketName,
+    });
 
-    new s3deploy.BucketDeployment(this, "Client-side React app", {
+    new s3deploy.BucketDeployment(this, `site-bucket-deployment-${suffix}`, {
       sources: [s3deploy.Source.asset(appDir())],
-      destinationBucket: mySiteBucket,
+      destinationBucket: siteBucket,
     });
 
     const ssrEdgeFunction = new cloudfront.experimental.EdgeFunction(
       this,
-      "ssrEdgeHandler",
+      `ssr-edge-function-${suffix}`,
       {
         runtime: lambda.Runtime.NODEJS_LATEST,
         handler: "index.handler",
@@ -60,7 +69,7 @@ export class AppStack extends Stack {
 
     const cloudfrontFunction = new cloudfront.Function(
       this,
-      "RoutingFunction",
+      `cloudfront-function-${suffix}`,
       {
         code: cloudfront.FunctionCode.fromInline(`
           function handler(event) {
@@ -77,33 +86,37 @@ export class AppStack extends Stack {
       }
     );
 
-    const distribution = new cloudfront.Distribution(this, "ssr-cdn", {
-      defaultBehavior: {
-        origin: new origins.S3Origin(mySiteBucket),
-        functionAssociations: [
-          {
-            function: cloudfrontFunction,
-            eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
-          },
-        ],
-      },
-      additionalBehaviors: {
-        "/ssr": {
-          origin: new origins.S3Origin(mySiteBucket),
-          edgeLambdas: [
+    const distribution = new cloudfront.Distribution(
+      this,
+      `ssr-cdn-${suffix}`,
+      {
+        defaultBehavior: {
+          origin: new origins.S3Origin(siteBucket),
+          functionAssociations: [
             {
-              functionVersion: ssrEdgeFunction.currentVersion,
-              eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
+              function: cloudfrontFunction,
+              eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
             },
           ],
         },
-      },
-    });
+        additionalBehaviors: {
+          "/ssr": {
+            origin: new origins.S3Origin(siteBucket),
+            edgeLambdas: [
+              {
+                functionVersion: ssrEdgeFunction.currentVersion,
+                eventType: cloudfront.LambdaEdgeEventType.ORIGIN_REQUEST,
+              },
+            ],
+          },
+        },
+      }
+    );
 
-    new CfnOutput(this, "CF URL", {
+    new CfnOutput(this, `cf-url-${suffix}`, {
       value: `https://${distribution.distributionDomainName}`,
     });
-    new CfnOutput(this, "Lambda@Edge SSR URL", {
+    new CfnOutput(this, `lambda-edge-ssr-url-${suffix}`, {
       value: `https://${distribution.distributionDomainName}/ssr`,
     });
   }

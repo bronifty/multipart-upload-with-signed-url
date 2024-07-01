@@ -10,3 +10,5 @@ function handler(event) {
     body: "Hello, World!",
   };
 }
+
+export { handler };
