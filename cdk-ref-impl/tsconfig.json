@@ -1,11 +1,10 @@
 {
   "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
-    "rootDir": ".", // Set rootDir to the project root
-    "outDir": "dist"
+    "rootDir": ".",
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
-  "exclude": [
-    "cdk.out", // Exclude the cdk.out directory
-    "node_modules" // Exclude the node_modules directory
-  ]
+  "exclude": ["cdk.out", "node_modules"]
 }
