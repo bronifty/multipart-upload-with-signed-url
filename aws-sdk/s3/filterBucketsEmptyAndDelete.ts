@@ -18,25 +18,6 @@ async function filterBucketsEmptyAndDelete(
       await deleteBucket(profile, bucket.Name);
     }
   }
-
-  //   await emptyBucket(profile, bucketName);
-  //   await deleteBucket(profile, bucketName);
-  // console.log(`Buckets: ${buckets.map((bucket) => bucket.Name).join(", ")}`);
 }
 
-// Usage example
 filterBucketsEmptyAndDelete("default").catch(console.error);
-
-// // Composite function to delete all objects and then the bucket
-// async function mainEmptyAndDeleteBucket(
-//   profile: string = "default",
-//   bucketName: string
-// ): Promise<void> {
-//   await emptyBucket(profile, bucketName);
-//   await deleteBucket(profile, bucketName);
-// }
-
-// // Usage example
-// mainEmptyAndDeleteBucket("default", "medium-s3-cloudfront-0e8100e00c51").catch(
-//   console.error
-// );
