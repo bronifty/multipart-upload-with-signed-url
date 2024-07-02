@@ -3,7 +3,7 @@
 // import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
 
-import { AppStack } from "./origins-stack";
+import { AppStack } from "./stack";
 
 const app = new cdk.App();
 

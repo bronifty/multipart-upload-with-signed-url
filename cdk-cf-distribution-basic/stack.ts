@@ -1,6 +1,5 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
-import { appDir, apiDir } from "./utils/fs";
 
 export class AppStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -14,3 +13,10 @@ export class AppStack extends cdk.Stack {
     });
   }
 }
+
+const app = new cdk.App();
+
+new AppStack(app, "AppStack", {
+  env: { region: "us-east-1" },
+  description: "App Stack",
+});
