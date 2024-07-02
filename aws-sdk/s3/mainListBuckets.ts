@@ -8,4 +8,4 @@ async function mainListBuckets(profile: string = "default"): Promise<void> {
 }
 
 // Usage example
-mainListBuckets("sst").catch(console.error);
+mainListBuckets("default").catch(console.error);
