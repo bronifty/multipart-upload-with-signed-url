@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "cdk": "tsc && cdk"
+    "cdk": "tsc && npx cdk"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",

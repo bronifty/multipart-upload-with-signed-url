@@ -1,0 +1,188 @@
+{
+ "Description": "Lambda Stack",
+ "Resources": {
+  "MyLambdaFunctionServiceRole313A4D46": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "LambdaStack/MyLambdaFunction/ServiceRole/Resource"
+   }
+  },
+  "MyLambdaFunction67CCA873": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-1"
+     },
+     "S3Key": "51a2030b9c4cdbe03252fab7f255673c1261ad3685a8307188147aa7261a386b.zip"
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "MyLambdaFunctionServiceRole313A4D46",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x"
+   },
+   "DependsOn": [
+    "MyLambdaFunctionServiceRole313A4D46"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "LambdaStack/MyLambdaFunction/Resource",
+    "aws:asset:path": "asset.51a2030b9c4cdbe03252fab7f255673c1261ad3685a8307188147aa7261a386b",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "MyLambdaFunctionFunctionUrl1DF01F79": {
+   "Type": "AWS::Lambda::Url",
+   "Properties": {
+    "AuthType": "NONE",
+    "TargetFunctionArn": {
+     "Fn::GetAtt": [
+      "MyLambdaFunction67CCA873",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "LambdaStack/MyLambdaFunction/FunctionUrl/Resource"
+   }
+  },
+  "MyLambdaFunctioninvokefunctionurlE56F3C97": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunctionUrl",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "MyLambdaFunction67CCA873",
+      "Arn"
+     ]
+    },
+    "FunctionUrlAuthType": "NONE",
+    "Principal": "*"
+   },
+   "Metadata": {
+    "aws:cdk:path": "LambdaStack/MyLambdaFunction/invoke-function-url"
+   }
+  },
+  "Distribution830FAC52": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "DefaultCacheBehavior": {
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "Compress": true,
+      "TargetOriginId": "LambdaStackDistributionOrigin1080E1B29",
+      "ViewerProtocolPolicy": "allow-all"
+     },
+     "Enabled": true,
+     "HttpVersion": "http2",
+     "IPV6Enabled": true,
+     "Origins": [
+      {
+       "CustomOriginConfig": {
+        "OriginProtocolPolicy": "https-only",
+        "OriginSSLProtocols": [
+         "TLSv1.2"
+        ]
+       },
+       "DomainName": {
+        "Fn::Select": [
+         2,
+         {
+          "Fn::Split": [
+           "/",
+           {
+            "Fn::GetAtt": [
+             "MyLambdaFunctionFunctionUrl1DF01F79",
+             "FunctionUrl"
+            ]
+           }
+          ]
+         }
+        ]
+       },
+       "Id": "LambdaStackDistributionOrigin1080E1B29"
+      }
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "LambdaStack/Distribution/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/02NSQ7CMAxFz8LeNdByAQaxRkWskZsaZJomUpzAIsrdUZnE6v1B+r/GZbPCxYweWpl+qKx0mI+RzAD00HO2NHY9Yd4nZ6J4B9uL++mvOAU75R8cOIyiKt4VEBoxt97yVEwsoM2ZVDkqrieANrhJZuC4IWUw1qf+EryLmHeiMUiXvr//vhRoWX0KhuG1c4x0FXd9/XyKAs73jDed3+saG1zMbipSheSijIztm09IjW+3AgEAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "LambdaStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
