@@ -1,5 +1,5 @@
 # Makefile
-all: engine-start engine-dev engine-install api-get-all api-get-one api-add-one api-delete-one api-delete-all function-get-all function-get-one function-deploy function-update function-invoke function-delete-one function-delete-all clean check-variables cdk-bootstrap cdk-install get-stacks get-stack-outputs list-buckets
+all: engine-start engine-dev engine-install api-get-all api-get-one api-add-one api-delete-one api-delete-all list-functions function-get-one function-deploy function-update function-invoke function-delete-one function-delete-all clean check-variables cdk-bootstrap cdk-install list-stacks get-stack-outputs list-buckets
 
 profile ?= default
 
@@ -7,8 +7,14 @@ profile ?= default
 executable:
 	chmod -R +x .
 
-get-stacks:
-	./scripts/stacks/get-stacks.sh $(profile)
+list-stacks:
+	./scripts/stacks/list-stacks.sh $(profile)
+
+list-buckets:
+	./scripts/s3/list-buckets.sh $(profile)
+
+list-functions:
+	./scripts/function/list-functions.sh $(profile)
 
 get-stack-outputs:
 	./scripts/stacks/get-stack-outputs.sh $(profile) $(stack)
@@ -16,8 +22,7 @@ get-stack-outputs:
 delete-stack:
 	./scripts/stacks/delete-stack.sh $(profile) $(stack)
 
-list-buckets:
-	./scripts/s3/list-buckets.sh $(profile)
+
 
 clean:
 	pnpm clean
@@ -56,8 +61,6 @@ app-install:
 # call with function=<function-name>
 # eg make function-deploy function=my-function
 # a call with no args will have default args applied from the variables file
-function-get-all:
-	./scripts/function/function-get-all.sh
 
 function-get-one:
 	./scripts/function/function-get-one.sh $(function) 
@@ -129,5 +132,5 @@ api-create-default-route:
 	./scripts/api/3-api-create-default-route.sh $(api) $(integration)
 
 
-.PHONY: all engine-start engine-dev engine-install api-get-all api-get-one api-add-one api-delete-one api-delete-all function-get-all function-get-one function-deploy function-update function-invoke function-delete-one function-delete-all clean check-variables cdk-bootstrap cdk-install get-stacks get-stack-outputs delete-stack list-buckets
+.PHONY: all engine-start engine-dev engine-install api-get-all api-get-one api-add-one api-delete-one api-delete-all list-functions function-get-one function-deploy function-update function-invoke function-delete-one function-delete-all clean check-variables cdk-bootstrap cdk-install list-stacks get-stack-outputs delete-stack list-buckets
 
