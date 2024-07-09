@@ -13,6 +13,9 @@ get-stacks:
 get-stack-outputs:
 	./scripts/stacks/get-stack-outputs.sh $(profile) $(stack)
 
+delete-stack:
+	./scripts/stacks/delete-stack.sh $(profile) $(stack)
+
 clean:
 	pnpm clean
 
@@ -123,5 +126,5 @@ api-create-default-route:
 	./scripts/api/3-api-create-default-route.sh $(api) $(integration)
 
 
-.PHONY: all engine-start engine-dev engine-install api-get-all api-get-one api-add-one api-delete-one api-delete-all function-get-all function-get-one function-deploy function-update function-invoke function-delete-one function-delete-all clean check-variables cdk-bootstrap cdk-install get-stacks get-stack-outputs
+.PHONY: all engine-start engine-dev engine-install api-get-all api-get-one api-add-one api-delete-one api-delete-all function-get-all function-get-one function-deploy function-update function-invoke function-delete-one function-delete-all clean check-variables cdk-bootstrap cdk-install get-stacks get-stack-outputs delete-stack
 
