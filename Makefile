@@ -22,7 +22,8 @@ get-stack-outputs:
 delete-stack:
 	./scripts/stacks/delete-stack.sh $(profile) $(stack)
 
-
+remove-buckets:
+	./scripts/s3/remove-buckets.sh $(profile)
 
 clean:
 	pnpm clean
