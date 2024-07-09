@@ -1,5 +1,5 @@
 # Makefile
-all: engine-start engine-dev engine-install api-get-all api-get-one api-add-one api-delete-one api-delete-all list-functions function-get-one function-deploy function-update function-invoke function-delete-one function-delete-all clean check-variables cdk-bootstrap cdk-install list-stacks get-stack-outputs list-buckets
+all: engine-start engine-dev engine-install api-get-all api-get-one api-add-one api-delete-one api-delete-all list-functions function-get-one function-deploy function-update function-invoke function-delete-one function-delete-all clean check-variables cdk-bootstrap cdk-install list-stacks get-stack-outputs list-buckets delete-buckets
 
 profile ?= default
 
@@ -22,8 +22,8 @@ get-stack-outputs:
 delete-stack:
 	./scripts/stacks/delete-stack.sh $(profile) $(stack)
 
-remove-buckets:
-	./scripts/s3/remove-buckets.sh $(profile)
+delete-buckets:
+	./scripts/s3/delete-buckets.sh $(profile)
 
 clean:
 	pnpm clean
@@ -133,5 +133,5 @@ api-create-default-route:
 	./scripts/api/3-api-create-default-route.sh $(api) $(integration)
 
 
-.PHONY: all engine-start engine-dev engine-install api-get-all api-get-one api-add-one api-delete-one api-delete-all list-functions function-get-one function-deploy function-update function-invoke function-delete-one function-delete-all clean check-variables cdk-bootstrap cdk-install list-stacks get-stack-outputs delete-stack list-buckets
+.PHONY: all engine-start engine-dev engine-install api-get-all api-get-one api-add-one api-delete-one api-delete-all list-functions function-get-one function-deploy function-update function-invoke function-delete-one function-delete-all clean check-variables cdk-bootstrap cdk-install list-stacks get-stack-outputs delete-stack list-buckets delete-buckets
 
