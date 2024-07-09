@@ -16,14 +16,17 @@ list-buckets:
 list-functions:
 	./scripts/function/list-functions.sh $(profile)
 
-get-stack-outputs:
-	./scripts/stacks/get-stack-outputs.sh $(profile) $(stack)
-
 delete-stack:
 	./scripts/stacks/delete-stack.sh $(profile) $(stack)
 
 delete-buckets:
 	./scripts/s3/delete-buckets.sh $(profile)
+
+delete-functions:
+	./scripts/function/delete-functions.sh $(profile)
+
+get-stack-outputs:
+	./scripts/stacks/get-stack-outputs.sh $(profile) $(stack)
 
 clean:
 	pnpm clean
