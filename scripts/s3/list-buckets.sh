@@ -14,7 +14,7 @@ else
 fi
    
 echo "aws s3api list-buckets --profile $PROFILE_NAME"
-aws s3api list-buckets --profile $PROFILE_NAME
+aws s3api list-buckets --profile $PROFILE_NAME --query 'Buckets[*].Name' --output text
 
 
 
