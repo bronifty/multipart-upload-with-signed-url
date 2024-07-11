@@ -17,6 +17,8 @@ fi
     "winglang.bronifty.xyz"
     "cdk-hnb659fds-assets-851725517932-us-east-1"
     "aws-sam-cli-managed-default-samclisourcebucket-cn52sgxeu5ot"
+    "nathanjmorton.xyz"
+    "www.nathanjmorton.xyz"
 )
 
 allBuckets=$(aws s3api list-buckets --query "Buckets[].Name" --output text)
